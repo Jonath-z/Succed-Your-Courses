@@ -1,5 +1,4 @@
 import React from 'react'
-import { Typography,Grid } from '@mui/material';
 import { useState,useEffect } from 'react';
 import { fireStoreDB } from '../modules/firebase';
 import CryptoJS from 'crypto-js';
@@ -27,38 +26,26 @@ const User = () => {
     return (
         <div>
             <div className='user-welcome-container'>
-                <div className='user-welcome'>
-                    <Typography component='h1' style={{ fontSize: 25 }} className='welcome-h1'>
+                <div className='mt-10'>
+                    <h1 className='text-4xl text-white ml-5'>
                         Welcome to succed your courses
-                    </Typography>
-                    <Typography component='p' style={{ fontSize: 15 }}>
+                    </h1>
+                    <p className='w-30 ml-5 text-xs text-gray-300 mt-3'>
                         Let make your student's life easy
-                    </Typography>
+                    </p>
                 </div>
                 <div className='user-profile'>
         
                 </div>
             </div>
-            <div className='user-about' style={{ marginTop: 50 }}>
-                {/* <div className='user-about-container'> */}
+            <div className='user-about mt-5'>
                 {userData !== null &&
-                    <Typography component='div'>
-                        <Grid container row='true' spacing={{ xs: 2 }}>
-                            <Grid item>
-                                <img className='user-about-profile' src={userData.profile} alt='user' style={{ width: 40, borderRadius: '50%' }} />
-                            </Grid>
-                            <Grid item>
-                               <p className='user-about-name' style={{marginTop:10}}>Name: {userData.name}</p>
-                            </Grid>
-                        </Grid>
-                        {userData.subcription && <Grid container row='true'>
-                            <Grid item>
-                                <p className='user-about-supscription'>Supscription: {userData.subcription}</p>
-                            </Grid>
-                        </Grid>}
-                    </Typography>
-                }
-                {/* </div> */}
+                    <div className='flex flex-col mt-3'>
+                        <div className='flex flex-row ml-5'>
+                            <img className='user-about-profile' src={userData.profile} alt='user' style={{ width: 40, borderRadius: '50%' }} />
+                            <p className='user-about-name ml-2 text-sm mt-2'>{userData.name}</p>
+                        </div>
+                    </div>}
             </div>
         </div>
     );

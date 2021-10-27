@@ -1,7 +1,6 @@
 import React from 'react';
 import Welcome from './Welcome'
 import { useState, useEffect } from 'react';
-import { Button } from '@mui/material';
 import { FcGoogle } from 'react-icons/fc';
 import firebase, { signInwithGoogle,fireStoreDB } from '../modules/firebase';
 import uuid from 'react-uuid';
@@ -54,14 +53,13 @@ const Login = () => {
                     transform: 'translateY(-50%)',
                     width: '100%'
                 }}>
-                    <Button variant='outlined' onClick={signInwithGoogle} >
+                    <button onClick={signInwithGoogle}>
                         <FcGoogle
                             style={{
                                 fontSize: 30,
                                 paddingRight: 10
                                 
-                            }}
-                        />Login with google</Button>
+                            }} />Login with google</button>
                 </div>
             }
         </div>
