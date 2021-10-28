@@ -53,13 +53,12 @@ const Login = () => {
                     transform: 'translateY(-50%)',
                     width: '100%'
                 }}>
-                    <button onClick={signInwithGoogle}>
-                        <FcGoogle
-                            style={{
-                                fontSize: 30,
-                                paddingRight: 10
-                                
-                            }} />Login with google</button>
+                <button onClick={signInwithGoogle}><FcGoogle
+                 style={{
+                     fontSize: 20,
+                     paddingRight: 10
+                     
+                 }}></FcGoogle>Login with google</button>
                 </div>
             }
         </div>
