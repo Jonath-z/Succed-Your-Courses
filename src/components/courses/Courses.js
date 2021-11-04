@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import firebase,{ realTimeDB,fireStoreDB} from '../modules/firebase';
 import CryptoJS from 'crypto-js';
 import MyModule from './MyModule';
+// import uuid from 'react-uuid';
 
 const userID = CryptoJS.AES.decrypt(`${window.location.search.replace('?id=', '')}`, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`).toString(CryptoJS.enc.Utf8);
 
@@ -11,7 +12,7 @@ const Courses = () => {
     const [userCourses, setUsersCourses] = useState();
     const [isMyModules, setIsMyModules] = useState(false);
 
-    useEffect(() =>{
+    useEffect(() => {
         realTimeDB.ref('/modules').on('value', (snapshot) => {
             if (snapshot.exists()) {
                 const courses = Object.values(snapshot.val());
@@ -68,12 +69,17 @@ const Courses = () => {
                 }}>My modules</button>
             </div>
             {
-              !isMyModules && modules !== undefined && modules.reverse().map(cours => {
+                !isMyModules && modules !== undefined && modules.reverse().map(cours => {
                     return (
                         <div key={cours.id} className='ml-5 mr-5 pb-3 pl-2 rounded-lg mt-5 shadow-xl'>
                             <h3 className='text-lg mt-2'>{cours.module}</h3>
                             <p className='text-xs text-gray-600'>{cours.class}</p>
                             <div className='mt-2'>
+                                {userCourses === undefined &&
+                                    <button type='button' className='border-2 border-color-red rounded pl-5 pr-5' id={cours.id} onClick={(e) => {
+                                        sucribeTocourse(e);
+                                    }}>
+                                        Suscribe to the module</button>}
                                 {userCourses !== undefined && userCourses.indexOf(cours.id) === -1 &&
                                     <button type='button' className='border-2 border-color-red rounded pl-5 pr-5' id={cours.id} onClick={(e) => {
                                         sucribeTocourse(e);
@@ -86,7 +92,7 @@ const Courses = () => {
             }
             {
                 isMyModules && <MyModule
-                subscribedModule={userCourses}
+                    subscribedModule={userCourses}
                 />
             }
         </div>
