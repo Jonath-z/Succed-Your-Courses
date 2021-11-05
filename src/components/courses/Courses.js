@@ -8,14 +8,15 @@ import MyModule from './MyModule';
 const userID = CryptoJS.AES.decrypt(`${window.location.search.replace('?id=', '')}`, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`).toString(CryptoJS.enc.Utf8);
 
 const Courses = () => {
-    const [modules, setModules] = useState();
-    const [userCourses, setUsersCourses] = useState();
+    const [modules, setModules] = useState(JSON.parse(localStorage.getItem('courses')));
+    const [userCourses, setUsersCourses] = useState(JSON.parse(localStorage.getItem('userData')).courses);
     const [isMyModules, setIsMyModules] = useState(false);
 
     useEffect(() => {
         realTimeDB.ref('/modules').on('value', (snapshot) => {
             if (snapshot.exists()) {
                 const courses = Object.values(snapshot.val());
+                localStorage.setItem('courses', JSON.stringify(courses));
                 setModules(courses);
             }
         });

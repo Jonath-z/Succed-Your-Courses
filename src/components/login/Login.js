@@ -31,11 +31,13 @@ const Login = () => {
                             id: userID
                         })
                         history.push(`/welcome/?id=${CryptoJS.AES.encrypt(userID, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`)}`);
+                        localStorage.setItem('userID',CryptoJS.AES.encrypt(userID, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`));
                     }
                     else {
                         snapshot.forEach(doc => {
                             console.log(doc.data());
                             history.push(`/welcome/?id=${CryptoJS.AES.encrypt(doc.data().id, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`)}`);
+                            localStorage.setItem('userID',CryptoJS.AES.encrypt(userID, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`));
                         })
                     }
                 }).catch(err => console.log(err))

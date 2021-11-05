@@ -6,7 +6,7 @@ import './User.css';
 // import { useHistory } from 'react-router-dom';
 
 const User = () => {
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
 
     useEffect(() => {
         const encryptedUserID = window.location.search.replace('?id=', '');
@@ -17,6 +17,7 @@ const User = () => {
             .get()
             .then((snapshot) => {
                 snapshot.forEach(doc => {
+                    localStorage.setItem('userData', JSON.stringify(doc.data()));
                     setUserData(doc.data());
                     console.log(doc.data());
                 })

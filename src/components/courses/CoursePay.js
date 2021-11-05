@@ -4,10 +4,12 @@ import { fireStoreDB, realTimeDB, storageDB } from '../modules/firebase';
 import { AiOutlineClose } from 'react-icons/ai';
 import uuid from 'react-uuid';
 import CryptoJS from 'crypto-js';
+import { useHistory } from 'react-router-dom';
 
 const encryptedUserID = window.location.search.replace('?id=', '');
 const userID = CryptoJS.AES.decrypt(`${encryptedUserID}`, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`).toString(CryptoJS.enc.Utf8);
 const CoursePay = (props) => {
+    let history = useHistory();
     const [accessCode, setAccessCode] = useState('');
     const [isgetAccessCode, setIsGetAccessCode] = useState(false);
     const [uploadState, setUploadState] = useState('0');
@@ -41,6 +43,7 @@ const CoursePay = (props) => {
                     snapshot.forEach(doc => {
                         if (doc.data().accessKey === accessCode) {
                             console.log(`${moduleID} is opened`);
+                            history.push(`/module/?id=${moduleID}`);
                             setAccessCode('');
                         }
                         else {
@@ -87,7 +90,9 @@ const CoursePay = (props) => {
                     <p className='text-red-700 text-xs text-center mt-2' onClick={() => {
                         setIsGetAccessCode(true);
                     }}>Request the access code</p>
-                    <button type='button' onClick={() => { openModule(props.moduleID) }} className='border-2 mt-2 bg-gray-600 text-white w-56'>Submit</button>
+                    {
+                       accessCode  !== '' && <button type='button' onClick={() => { openModule(props.moduleID) }} className='border-2 mt-2 bg-gray-600 text-white w-56'>Submit</button>
+                    }
                 </div>}
         
                 {isgetAccessCode && <div className='mt-4 flex flex-col items-center'>
