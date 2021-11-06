@@ -33,29 +33,35 @@ const Courses = () => {
     const sucribeTocourse = (e) => {
         e.preventDefault();
         console.log(userID);
-        fireStoreDB.collection('/users').where("id", "==", `${userID}`)
+        console.log('course id ', e.target.id)
+        // update sucribed course in  firestore;
+        fireStoreDB.collection("/users").where("id", "==", `${userID}`)
             .get()
             .then((snapshot) => {
-                snapshot.forEach(doc => {
-                    console.log(doc.id);
-                    const upadate = async () => {
-                        const ref = fireStoreDB.collection('/users').doc(`${doc.id}`);
+                console.log(snapshot);
+                const upadate = () => {
+                    snapshot.forEach(async (doc) => {
+                        console.log(doc.id);
+                        const ref = fireStoreDB.collection("/users").doc(`${doc.id}`);
                         if (doc.data().courses && doc.data().courses.indexOf(`${e.target.id}`) === -1) {
                             await ref.set({
                                 courses: firebase.firestore.FieldValue.arrayUnion(`${e.target.id}`)
                             }, { merge: true });
                         }
-                    }
-                    upadate();
-                    fireStoreDB.collection('/users').where("id", "==", `${userID}`)
-                        .get()
-                        .then(newSnapshot => {
-                            newSnapshot.forEach(newDoc => {
-                                setUsersCourses(newDoc.data().courses);
-                            })
-                        })
-                });
+                    });
+                }
+                upadate();
             });
+        // update suscribed course in localStorage
+        const userDataString = localStorage.getItem('userData');
+        const jsonUserData = JSON.parse(userDataString);
+        // console.log(jsonUserData);
+        if (jsonUserData.courses.indexOf(`${e.target.id}`) === -1) {
+            jsonUserData.courses.push(e.target.id);
+            console.log(jsonUserData)
+            localStorage.setItem('userData', JSON.stringify(jsonUserData));
+            setUsersCourses(JSON.parse(localStorage.getItem('userData')).courses);
+        }
     }
 
     return (
@@ -76,11 +82,11 @@ const Courses = () => {
                             <h3 className='text-lg mt-2'>{cours.module}</h3>
                             <p className='text-xs text-gray-600'>{cours.class}</p>
                             <div className='mt-2'>
-                                {userCourses === undefined &&
+                                {/* {userCourses === undefined &&
                                     <button type='button' className='border-2 border-color-red rounded pl-5 pr-5' id={cours.id} onClick={(e) => {
                                         sucribeTocourse(e);
                                     }}>
-                                        Suscribe to the module</button>}
+                                        Suscribe to the module</button>} */}
                                 {userCourses !== undefined && userCourses.indexOf(cours.id) === -1 &&
                                     <button type='button' className='border-2 border-color-red rounded pl-5 pr-5' id={cours.id} onClick={(e) => {
                                         sucribeTocourse(e);
@@ -93,7 +99,7 @@ const Courses = () => {
             }
             {
                 isMyModules && <MyModule
-                    subscribedModule={userCourses}
+                    subscribedModule={JSON.parse(localStorage.getItem('userData')).courses}
                 />
             }
         </div>

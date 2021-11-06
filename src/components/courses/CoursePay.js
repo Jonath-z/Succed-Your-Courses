@@ -36,25 +36,16 @@ const CoursePay = (props) => {
     
     const openModule = (moduleID) => {
         console.log(moduleID)
-        fireStoreDB.collection('users').where("id", "==", `${userID}`)
-            .get()
-            .then(snapshot => {
-                if (!snapshot.empty) {
-                    snapshot.forEach(doc => {
-                        if (doc.data().accessKey === accessCode) {
-                            console.log(`${moduleID} is opened`);
-                            history.push(`/module/?id=${moduleID}`);
-                            setAccessCode('');
-                        }
-                        else {
-                            alert('Wrong access Key');
-                            navigator.vibrate(300);
-                        }
-                    })
-                } else {
-                    setIsGetAccessCode(true);
-                }
-            });
+        const userAccessCode = JSON.parse(localStorage.getItem('userData')).accessKey;
+        if (userAccessCode === accessCode) {
+            console.log(`${moduleID} is opened`);
+            history.push(`/module/?id=${moduleID}`);
+            setAccessCode('');
+        }
+        else {
+            alert('Wrong access Key');
+            navigator.vibrate(300);
+        }
     }
     
     const requestAccessKey = () => {
@@ -91,7 +82,11 @@ const CoursePay = (props) => {
                         setIsGetAccessCode(true);
                     }}>Request the access code</p>
                     {
-                       accessCode  !== '' && <button type='button' onClick={() => { openModule(props.moduleID) }} className='border-2 mt-2 bg-gray-600 text-white w-56'>Submit</button>
+                        accessCode !== '' && <button type='button' onClick={
+                            () => {
+                                openModule(props.moduleID)
+                            }}
+                            className='border-2 mt-2 bg-gray-600 text-white w-56'>Submit</button>
                     }
                 </div>}
         
@@ -107,7 +102,7 @@ const CoursePay = (props) => {
                         setIsGetAccessCode(false);
                     }}>Complete the access code</p>
                     {
-                      uploadState === 100 && payementUrl !== '' && <button type='button' onClick={requestAccessKey} className='mt-2 bg-gray-600 text-white border w-56'>Request</button>
+                        uploadState === 100 && payementUrl !== '' && <button type='button' onClick={requestAccessKey} className='mt-2 bg-gray-600 text-white border w-56'>Request</button>
                     }
                 </div>}
             </div >}
