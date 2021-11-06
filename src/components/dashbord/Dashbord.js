@@ -2,6 +2,11 @@ import React from 'react';
 import firebase,{ realTimeDB,fireStoreDB,storageDB } from '../modules/firebase';
 import { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
+import {
+    DeleteModuleFromRealTimeDB,
+    DeleteModuleFormUserCollectionfireStoreDB,
+    DeleteModuleDocumentFromFireStore
+} from './Delete';
 
 const Dashbord = () => {
     const [allModule, setAllModule] = useState();
@@ -53,7 +58,7 @@ const Dashbord = () => {
             module: `${addModuleName}`,
             id: `${moduleID}`,
             class: `${addModuleClass}`
-        })
+        });
         setAddModuleName('')
         setAddModuleClass('');
     }
@@ -73,48 +78,57 @@ const Dashbord = () => {
                                     <input type='text' placeholder='assignement,model question,...' className='border rounded-b-sm border-gray-700' onChange={optionNameHandeler} />
                                     <h5>Uploaded {uploadState}%</h5>
                                     <input type='file' placeholder='upload file' className='border rounded-b-sm border-gray-900' onChange={uploadFileHandler} />
-                                    {addOptionFileUrl !== '' && <button type='button' className='border rounded-b-sm border-gray-900 pt-1 pb-1 pl-1 pr-1 mr-2' onClick={() => {
-                                        fireStoreDB.collection('module-doc').where('moduleID', '==', course.id)
-                                            .get()
-                                            .then((snapshot) => {
-                                                if (snapshot.empty) {
-                                                    fireStoreDB.collection('module-doc').add({
-                                                        moduleID: `${course.id}`,
-                                                        moduleName: `${course.module}`,
-                                                        class: `${course.class}`,
-                                                        option:
-                                                            [{
-                                                                file: `${addOptionFileUrl}`,
-                                                                optionName: `${addOptionName}`
-                                                            }]
-                                                    })
-                                                }
-                                                else {
-                                                    snapshot.forEach(doc => {
-                                                        const upadate = async () => {
-                                                            const ref = fireStoreDB.collection('/module-doc').doc(`${doc.id}`);
-                                                            if (doc.data().option) {
-                                                                await ref.set({
-                                                                    option: firebase.firestore.FieldValue.arrayUnion({
+                                    {addOptionFileUrl !== '' &&
+                                        <div>
+                                            <button type='button' className='border rounded-b-sm border-gray-900 pt-1 pb-1 pl-1 pr-1 mr-2' onClick={() => {
+                                                fireStoreDB.collection('module-doc').where('moduleID', '==', course.id)
+                                                    .get()
+                                                    .then((snapshot) => {
+                                                        if (snapshot.empty) {
+                                                            fireStoreDB.collection('module-doc').add({
+                                                                moduleID: `${course.id}`,
+                                                                moduleName: `${course.module}`,
+                                                                class: `${course.class}`,
+                                                                option:
+                                                                    [{
                                                                         file: `${addOptionFileUrl}`,
                                                                         optionName: `${addOptionName}`
-                                                                    })
-                                                                }, { merge: true });
-                                                            }
+                                                                    }]
+                                                            })
                                                         }
-                                                        upadate()
-                                                    })
-                                                }
-                                            });
-                                        setAddOptionName('');
-                                        setAddOptionFileUrl('');
+                                                        else {
+                                                            snapshot.forEach(doc => {
+                                                                const upadate = async () => {
+                                                                    const ref = fireStoreDB.collection('/module-doc').doc(`${doc.id}`);
+                                                                    if (doc.data().option) {
+                                                                        await ref.set({
+                                                                            option: firebase.firestore.FieldValue.arrayUnion({
+                                                                                file: `${addOptionFileUrl}`,
+                                                                                optionName: `${addOptionName}`
+                                                                            })
+                                                                        }, { merge: true });
+                                                                    }
+                                                                }
+                                                                upadate()
+                                                            })
+                                                        }
+                                                    });
+                                                setAddOptionName('');
+                                                setAddOptionFileUrl('');
                                 
-                                    }}>Add</button>}
+                                            }}>Add</button>
+                                        </div>
+                                    }
                                     <button type='buttono' className='bg-red-600 text-white pt-1 pb-1 pl-1 pr-1' onClick={() => {
                                         setIsAddOption(false)
                                     }}>Cancel</button>
                                 </div>}
                             </div>
+                            <button type='button' className='bg-red-500 text-white' onClick={() => {
+                                DeleteModuleFromRealTimeDB(course.id);
+                                DeleteModuleFormUserCollectionfireStoreDB(course.id);
+                                DeleteModuleDocumentFromFireStore(course.id);
+                            }}>Delete Module</button>
                         </div>
                     )
                 })
