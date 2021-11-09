@@ -8,8 +8,8 @@ import MyModule from './MyModule';
 const userID = CryptoJS.AES.decrypt(`${window.location.search.replace('?id=', '')}`, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`).toString(CryptoJS.enc.Utf8);
 
 const Courses = () => {
-    const [modules, setModules] = useState(JSON.parse(localStorage.getItem('courses')));
-    const [userCourses, setUsersCourses] = useState(JSON.parse(localStorage.getItem('userData')).courses);
+    const [modules, setModules] = useState();
+    const [userCourses, setUsersCourses] = useState(null);
     const [isMyModules, setIsMyModules] = useState(false);
 
     useEffect(() => {
@@ -87,7 +87,7 @@ const Courses = () => {
                                         sucribeTocourse(e);
                                     }}>
                                         Suscribe to the module</button>} */}
-                                {userCourses !== undefined && userCourses.indexOf(cours.id) === -1 &&
+                                {userCourses !== null && userCourses.indexOf(cours.id) === -1 &&
                                     <button type='button' className='border-2 border-color-red rounded pl-5 pr-5' id={cours.id} onClick={(e) => {
                                         sucribeTocourse(e);
                                     }}>
