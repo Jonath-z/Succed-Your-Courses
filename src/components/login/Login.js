@@ -16,7 +16,8 @@ const Login = () => {
             setIsWelcome(false);
         }
         setTimeout(setTime, 3000);
-    }, [])
+    }, []);
+    
     useEffect(() => {
         const userID = uuid();
         firebase.auth().onAuthStateChanged(user => {
@@ -24,16 +25,18 @@ const Login = () => {
                 .get()
                 .then((snapshot) => {
                     if (snapshot.empty) {
+                        console.log(snapshot.empty);
                         fireStoreDB.collection('users').add({
                             name: user.displayName,
                             email: user.email,
                             profile: user.photoURL,
-                            id: userID
+                            id: userID,
+                            courses: []
                         })
                         history.push(`/welcome/?id=${CryptoJS.AES.encrypt(userID, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`)}`);
                         localStorage.setItem('userID',CryptoJS.AES.encrypt(userID, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`));
                     }
-                    else {
+                    if(!snapshot.empty) {
                         snapshot.forEach(doc => {
                             console.log(doc.data());
                             history.push(`/welcome/?id=${CryptoJS.AES.encrypt(doc.data().id, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`)}`);
