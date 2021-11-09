@@ -1,7 +1,11 @@
 import React from 'react'
 import './Welcome.css';
+import { useEffect } from 'react';
 
 const Welcome = () => {
+    useEffect(() => {
+        localStorage.clear();
+        },[])
     return (
         <div className='welcome-container'>
             <div className='Welcome'>
