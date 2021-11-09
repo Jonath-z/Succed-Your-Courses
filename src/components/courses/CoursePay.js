@@ -53,18 +53,19 @@ const CoursePay = (props) => {
         fireStoreDB.collection('users').where("id", "==", `${userID}`)
             .get()
             .then(snapshot => {
-                if (!snapshot.empty) {
+                // if (!snapshot.empty) {
                     snapshot.forEach(doc => {
-                        realTimeDB.ref('/request').child(requestID).set({
+                        console.log(userID);
+                        realTimeDB.ref('/request').child(`${requestID}`).set({
                             user: `${doc.data().email}`,
                             id: `${requestID}`,
                             payementProof: `${payementUrl}`
-                        }); 
+                        });
                     });
-                }
+                // }
             });
         if (uploadState === 100) {
-            setUploadState('')
+            setUploadState('0');
         }
         setPayementUrl('');
     }
