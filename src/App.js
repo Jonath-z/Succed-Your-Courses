@@ -5,6 +5,7 @@ import Home from './components/home/Home';
 import Dashbord from './components/dashbord/Dashbord';
 import ModuleContent from './components/coursesModules/ModuleContent'
 import SplashScreen from './components/_splash-screen/screens/SplashScreen';
+import AuthIndex from './components/Auth-user/AuthIndex';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <SplashScreen/>
         </div>
       </Route>
+      <Route path='/user-authentication' component={AuthIndex}/>
       <Route path='/welcome' component={Home} />
       <Route path='/dashbord' component={Dashbord} />
       <Route path='/module' component={ModuleContent} />
