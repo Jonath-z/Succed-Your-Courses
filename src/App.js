@@ -1,9 +1,10 @@
 import './App.css';
-import Login from './components/login/Login';
+// import Login from './components/login/Login';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from './components/home/Home';
 import Dashbord from './components/dashbord/Dashbord';
-import ModuleContent from './components/courses/coursesModules/ModuleContent'
+import ModuleContent from './components/coursesModules/ModuleContent'
+import SplashScreen from './components/_splash-screen/screens/SplashScreen';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       
       <Route path='/' exact>
         <div className="App">
-          <Login />
+          {/* <Login /> */}
+          <SplashScreen/>
         </div>
       </Route>
       <Route path='/welcome' component={Home} />
