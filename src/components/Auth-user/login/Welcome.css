@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&family=Zen+Kaku+Gothic+Antique&display=swap');
+.welcome-container{
+    position: absolute; 
+    top: 0%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.Welcome{
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.welcome-h1{
+ font-family: 'Raleway', sans-serif;
+}
