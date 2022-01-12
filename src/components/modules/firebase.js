@@ -14,11 +14,8 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-console.log(process.env);
+// console.log(process.env);
 export const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-export const signInwithGoogle = () => auth.signInWithRedirect(provider);
 export const storageDB = firebase.storage()
 export const realTimeDB = firebase.database();
 export const fireStoreDB = firebase.firestore();

@@ -3,11 +3,9 @@ import Login from './login/Login'
 import Signup from './signup/Signup';
 import { useSelector } from 'react-redux';
 
-const state = true;
-
 const AuthIndex = () => {
     const isSignup = useSelector((state) => state.auth);
-    console.log(isSignup);
+    // console.log(isSignup);
 
     return (
         <div>

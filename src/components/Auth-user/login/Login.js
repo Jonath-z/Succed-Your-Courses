@@ -1,19 +1,18 @@
 import React from 'react';
 import Welcome from './Welcome'
-import { useState, useEffect } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import firebase, { signInwithGoogle,fireStoreDB } from '../../modules/firebase';
-import uuid from 'react-uuid';
-import CryptoJS from 'crypto-js';
-import { useHistory } from 'react-router-dom';
+// import { useState, useEffect } from 'react';
+// import { FcGoogle } from 'react-icons/fc';
+// import firebase, { signInwithGoogle,fireStoreDB } from '../../modules/firebase';
+// import uuid from 'react-uuid';
+// import CryptoJS from 'crypto-js';
+// import { useHistory } from 'react-router-dom';
 import LoginForm from './tools/_form/LoginForm';
-import LoginButton from './tools/button/LoginButton';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionsCreators } from '../../../state';
 
 const Login = () => {
-    const [isWelcome, setIsWelcome] = useState(true);
+    // const [isWelcome, setIsWelcome] = useState(true);
     const dispatch = useDispatch();
     const { authLogin } = bindActionCreators(actionsCreators, dispatch);
     // console.log(authSignup);
@@ -45,9 +44,7 @@ const Login = () => {
 //                 }
 //                 if(!snapshot.empty) {
 //                     snapshot.forEach(doc => {
-//                         console.log(doc.data());
-//                         history.push(`/welcome/?id=${CryptoJS.AES.encrypt(doc.data().id, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`)}`);
-//                         localStorage.setItem('userID',CryptoJS.AES.encrypt(userID, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`));
+//                         console.log(doc.data());-
 //                     })
 //                 }
 //             }).catch(err => console.log(err))
@@ -66,7 +63,6 @@ const Login = () => {
                     <p className='font-Mulish mt-5'>Don't have an account? <span className='font-Poppins text-2778F0 cursor-pointer' onClick={() => { authLogin(true) }}>Sign up</span></p>
                 </div>
             </div>
-            <LoginButton/>
         </div>
     );
 }
