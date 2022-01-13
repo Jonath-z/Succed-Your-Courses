@@ -1,15 +1,23 @@
 import React from 'react'
 import User from '../user/User';
-import Courses from '../courses/Courses';
+import AllCourses from '../courses/AllCourses';
+import Search from '../search/Search';
+import EnrolledCourses from '../courses/EnrolledCourses';
 
 const Home = () => {
     return (
         <div>
-            <div className='absolute top-0 left-0 right-0 bg-pink-900 bottom-0 text-white'>
+            <div>
                 <User />
             </div>
-            <div className='absolute bottom-0  left-0 right-0 top-60 bg-white pb-20 rounded-tl-3xl rounded-tr-3xl overflow-scroll'>
-                <Courses/>
+            <div>
+                <EnrolledCourses/>
+            </div>
+            <div>
+                <Search/>
+            </div>
+            <div>
+                <AllCourses/>
             </div>
         </div>
     );

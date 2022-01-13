@@ -31,28 +31,36 @@ export const signupFormData = (data) => {
     }
 }
 
-export const loginFormData = (data) => {
-    return (dispatch) => {
-        dispatch({
-            type: actionsType.LOGIN_SUBMIT,
-            payload: data
-        });
+export const fetchUsers = (email) => {
+    return async(dispatch) => {
+        fireStoreDB.collection('users').where("email", "==", email).get()
+            .then((snapshot) => {
+                if (!snapshot.empty) {
+                    snapshot.forEach(doc => {
+                        // if (doc.data().password === password) {
+                            dispatch({
+                                type: actionsType.FETCH_USERS,
+                                payload: doc.data()
+                            });
+                        // }
+                    })
+                }
+        }).catch(err => console.log(err));
     }
 }
 
-export const fetchUsers = (database) => {
-    return async(dispatch) => {
-    database.collection('users').get()
-            .then((snapshot) => {
-            if (!snapshot.empty) {
-                snapshot.forEach(doc => {
-                    dispatch({
-                        type: actionsType.FETCH_USERS,
-                        payload: doc.data()
-                    });
-                    // console.log(doc.data());
+///////////////////// GET ALL COURSE ////////////////////////////////////////////
+export const getAllCourse = (database) => {
+    console.log(database);
+    return (dispatch) => {
+        database.ref('/modules').on('value', (snapshot) => {
+            if (snapshot.exists()) {
+                const courses = Object.values(snapshot.val());
+                dispatch({
+                    type: actionsType.ALL_COURSE,
+                    payload: courses
                 });
             }
-        }).catch(err => console.log(err));
+        });
     }
 }

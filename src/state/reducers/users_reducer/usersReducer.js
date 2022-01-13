@@ -7,6 +7,9 @@ const fetchUsersReducer = (state = [], action) => {
         case (actionsType.FETCH_USERS): {
             return action.payload
         }
+        case (actionsType.NO_USER_FOUND): {
+            return action.payload
+        }
         default:
             return state
     }

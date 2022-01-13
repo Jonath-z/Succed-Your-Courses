@@ -1,52 +1,18 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
-import { fireStoreDB } from '../modules/firebase';
-import CryptoJS from 'crypto-js';
-import './User.css';
-// import { useHistory } from 'react-router-dom';
+import { RiMenu2Line } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 
 const User = () => {
-    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
+    const user = useSelector((state) => state.fetchUsers);
 
-    useEffect(() => {
-        const encryptedUserID = window.location.search.replace('?id=', '');
-        console.log(encryptedUserID);
-        const userID = CryptoJS.AES.decrypt(`${encryptedUserID}`, `${process.env.REACT_APP_CRYPTOJS_ENCRYPT_KEY}`).toString(CryptoJS.enc.Utf8);
-        console.log(userID);
-        fireStoreDB.collection('users').where("id", "==", `${userID}`)
-            .get()
-            .then((snapshot) => {
-                snapshot.forEach(doc => {
-                    localStorage.setItem('userData', JSON.stringify(doc.data()));
-                    setUserData(doc.data());
-                    console.log(doc.data());
-                })
-            })
-            .catch(err => console.log(err));
-    }, []);
     return (
-        <div>
-            <div className='user-welcome-container'>
-                <div className='mt-10'>
-                    <h1 className='text-4xl text-white ml-5'>
-                        Welcome to succed your courses
-                    </h1>
-                    <p className='w-30 ml-5 text-xs text-gray-300 mt-3'>
-                        Let make your student's life easy
-                    </p>
-                </div>
-                <div className='user-profile'>
-        
-                </div>
+        <div className='flex flex-row justify-between items-center mt-3 mr-3 ml-3'>
+            <RiMenu2Line className='text-3xl cursor-pointer'/>
+            <div>
+                <p className='font-Poppins'>Explore Courses</p>
             </div>
-            <div className='user-about mt-5'>
-                {userData !== null &&
-                    <div className='flex flex-col mt-3'>
-                        <div className='flex flex-row ml-5'>
-                            <img className='user-about-profile' src={userData.profile} alt='user' style={{ width: 40, borderRadius: '50%' }} />
-                            <p className='user-about-name ml-2 text-sm mt-2'>{userData.name}</p>
-                        </div>
-                    </div>}
+            <div className='h-10 w-10 rounded-full text-white bg-2778F0 text-center flex justify-center items-center'>
+                <p className='font-Poppins'>{user.name.charAt(0).toUpperCase()}</p>
             </div>
         </div>
     );
