@@ -19,6 +19,7 @@ const Dashbord = () => {
     const [currentModuleId, setCourrentModuleID] = useState('');
     const [addModuleClass, setAddModuleClass] = useState('');
     const [allRequest, setAllRequest] = useState();
+    const [moduleCover, setModuleCover] = useState('');
 
 // ///////////////////////// GET ALL MODULES FROM DB //////////////////////////////////////
     useEffect(() => {
@@ -57,6 +58,19 @@ const Dashbord = () => {
             });
         });
     }
+
+    const addModuleCover = (e) => {
+        let coverRef = storageDB.ref('/module-cover').child(`/cover_${uuid()}`);
+        const file = e.target.files[0];
+        coverRef.put(file).then((snapshot) => {
+            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setUploadState(uploadProgress);
+            snapshot.ref.getDownloadURL().then(url => {
+                setModuleCover(url);
+                console.log(url);
+            });
+        });
+    }
 ///////////////////////// GET MODULE NAME FROM ADD MODULES'S INPUT //////////////////////////////////////    
     const addModuleNameHandler = (e) => {
         setAddModuleName(e.target.value);
@@ -72,10 +86,12 @@ const Dashbord = () => {
         realTimeDB.ref('/modules').child(moduleID).set({
             module: `${addModuleName}`,
             id: `${moduleID}`,
-            class: `${addModuleClass}`
+            class: `${addModuleClass}`,
+            cover: `${moduleCover}`
         });
         setAddModuleName('')
         setAddModuleClass('');
+        setModuleCover('');
     }
 
     return (
@@ -154,6 +170,7 @@ const Dashbord = () => {
             <div>
                 <div className='mt-4 flex flex-col ml-2 justify-center'>
                     <h2 className='text-2xl'>Add a module</h2>
+                    <input type='file'className='border rounded-b-sm border-gray-900 w-60 mt-3 pl-2' onChange={addModuleCover} />
                     <input type='text' className='border rounded-b-sm border-gray-900 w-60 mt-3 pl-2' placeholder='Module Name' onChange={addModuleNameHandler} />
                     <input type='text' className='border rounded-b-sm border-gray-900 w-60 mt-2 pl-2' placeholder='class' onChange={addModuleClassHandler} />
                     <button type='button' className='border rounded-b-sm border-gray-900 pt-1 pb-1 pl-1 pr-1 mr-2 w-56 mt-2 ml-2 bg-gray-600 hover:bg-gray-800 text-white' onClick={addModuleHandler}> Add module</button>
