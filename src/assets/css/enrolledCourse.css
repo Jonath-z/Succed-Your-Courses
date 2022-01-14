@@ -1,0 +1,9 @@
+.enrolledCourse-container{
+    width: 100%;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+}
+.enrolled-course{
+    width: 100vw;
+    scroll-snap-align: start;
+}
