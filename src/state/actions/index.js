@@ -49,7 +49,7 @@ export const fetchUsers = (email) => {
     }
 }
 
-///////////////////// GET ALL COURSE ////////////////////////////////////////////
+///////////////////// ALL COURSE ////////////////////////////////////////////
 export const getAllCourse = (database) => {
     console.log(database);
     return (dispatch) => {
@@ -61,6 +61,26 @@ export const getAllCourse = (database) => {
                     payload: courses
                 });
             }
+        });
+    }
+}
+
+///////////////////////////// ENROLL TO THE COURSE //////////////////////////////
+export const enroll = (courseID) => {
+    return (dispatch) => {
+        dispatch({
+            type: actionsType.ENROLL,
+            payload: courseID
+        });
+    }
+}
+
+//////////////////////// LEAVE THE COURSE ///////////////////////////////
+export const leave = (courseID) => {
+    return (dispatch) => {
+        dispatch({
+            type: actionsType.LEAVE,
+            payload: courseID
         });
     }
 }
