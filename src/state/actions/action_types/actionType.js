@@ -6,6 +6,8 @@ const actionsType = {
     FETCH_USERS: "FETCH_USERS",
     NO_USER_FOUND: "NO_USER_FOUND",
     ALL_COURSE: "ALL_COURSE",
+    ENROLL: "ENROLL",
+    LEAVE: "LEAVE"
 }
 
 export default actionsType;
