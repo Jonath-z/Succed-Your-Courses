@@ -5,6 +5,7 @@ import fetchUsersReducer from "./users_reducer/usersReducer";
 import { allCourseReducer } from "./course_reducer/allCourseReducer";
 import enroll from "./course_reducer/enrollReducer";
 import leave from "./course_reducer/leaveCourseReducer";
+import menuReducer from "./menuReducers/menuReducer";
 
 const reducers = combineReducers({
     auth: authReducer,
@@ -12,7 +13,8 @@ const reducers = combineReducers({
     fetchUsers: fetchUsersReducer,
     coursesReducer: allCourseReducer,
     enroll: enroll,
-    leave: leave
+    leave: leave,
+    menuReducer: menuReducer
 });
 
 export default reducers;

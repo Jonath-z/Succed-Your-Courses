@@ -1,5 +1,5 @@
 import actionsType from "./action_types/actionType";
-import { fireStoreDB } from "../../components/modules/firebase";
+import { fireStoreDB } from "../../components/services/firebase";
 
 // //////////////////////////// DISPLAY LOGIN & SIGNUP ACTION ////////////////////////////////////////
 export const authLogin = (authState) => {
@@ -82,5 +82,48 @@ export const leave = (courseID) => {
             type: actionsType.LEAVE,
             payload: courseID
         });
+    }
+}
+////////////////// MENU OPTIONS ////////////////////////////////////
+export const myCourse = (menu) => {
+    console.log('menu action', menu);
+    return (dispatch) => {
+        dispatch({
+            type: actionsType.MY_COUSES,
+            payload: menu
+        })
+    }
+}
+export const exploreCourse = (menu) => {
+    return (dispatch) => {
+        dispatch({
+            type: actionsType.EXPLORE_COURSES,
+            payload: menu
+        })
+    }
+}
+export const account = (menu) => {
+    return (dispatch) => {
+        dispatch({
+            type: actionsType.ACCOUNT,
+            payload: menu
+        })
+    }
+}
+export const reportProblem = (menu) => {
+    return (dispatch) => {
+        dispatch({
+            type: actionsType.REPORT_PROBLEM,
+            payload: menu
+        })
+    }
+}
+
+export const home = (menu) => {
+    return (dispatch) => {
+        dispatch({
+            type: actionsType.HOME,
+            payload: menu
+        })
     }
 }
