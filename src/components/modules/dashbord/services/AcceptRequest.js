@@ -1,4 +1,4 @@
-import { fireStoreDB,realTimeDB } from "../../services/firebase";
+import { fireStoreDB,realTimeDB } from "../../../services/firebase";
 import uuid from "react-uuid";
 
 export const  acceptRequest = (requestID,user) => {
