@@ -6,6 +6,7 @@ import { allCourseReducer } from "./course_reducer/allCourseReducer";
 import enroll from "./course_reducer/enrollReducer";
 import leave from "./course_reducer/leaveCourseReducer";
 import menuReducer from "./menuReducers/menuReducer";
+import { routerReducer } from 'react-router-redux';
 
 const reducers = combineReducers({
     auth: authReducer,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     coursesReducer: allCourseReducer,
     enroll: enroll,
     leave: leave,
-    menuReducer: menuReducer
+    menuReducer: menuReducer,
+    routing: routerReducer
 });
 
 export default reducers;

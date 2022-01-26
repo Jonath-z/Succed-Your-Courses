@@ -1,10 +1,10 @@
 import React, { useRef} from 'react';
 import { useSelector } from 'react-redux';
-import enrollTheCourse from './functions/enrollHandler';
+import enrollTheCourse from './services/enrollHandler';
 import { useDispatch } from 'react-redux';
 import { actionsCreators } from '../../../state';
 import { bindActionCreators } from 'redux';
-import leaveCourse from './functions/leaveTheCourse';
+import leaveCourse from './services/leaveTheCourse';
 
 const AllCourses = () => {
     const allCourses = useSelector((state) => state.coursesReducer);

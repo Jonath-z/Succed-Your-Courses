@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import RegisterButton from '../buttons';
-import encrypt from '../../functions/uploadForm/encrypt';
-import upload from '../../functions/uploadForm/upload';
-import handleRegisterSubmit from '../../functions/handleRegisterSubmit';
+import encrypt from '../../services/uploadForm/encrypt';
+import upload from '../../services/uploadForm/upload';
+import handleRegisterSubmit from '../../services/handleRegisterSubmit';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { actionsCreators } from '../../../../../../state';
