@@ -5,10 +5,12 @@ import Search from '../search';
 import EnrolledCourses from '../../modules/courses/EnrolledCourses';
 import { useSelector } from 'react-redux';
 import actionsType from '../../../state/actions/action_types/actionType';
+import { DispatchAllcourses } from '../../../hooks';
 
 const Home = () => {
+    DispatchAllcourses();
     const menuHandler = useSelector((state) => state.menuReducer);
-    console.log('menu handler', menuHandler);
+    // console.log('menu handler', menuHandler);
     switch (menuHandler) {
         case actionsType.MY_COUSES:
             return (

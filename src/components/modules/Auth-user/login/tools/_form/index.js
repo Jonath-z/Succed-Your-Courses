@@ -3,11 +3,12 @@ import LoginButton from '../button';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionsCreators } from '../../../../../../state';
-import handleLoginSubmit from '../../functions/handleLoginForm';
-import decryptPassword from '../../functions/decryptPassword';
+import handleLoginSubmit from '../../services/handleLoginForm';
+import decryptPassword from '../../services/decryptPassword';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import browserRoutes from '../../../../../../router/_broswerRoute/router';
+import { LocalStorage } from '../../../../../helper/localStorage';
 
 export const LoginForm = () => {
     const history = useHistory();
@@ -16,6 +17,7 @@ export const LoginForm = () => {
     const dispatch = useDispatch();
     const { fetchUsers } = bindActionCreators(actionsCreators, dispatch);
     const user = useSelector((state) => state.fetchUsers);
+    const courses = useSelector((state) => state.coursesReducer);
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -27,13 +29,15 @@ export const LoginForm = () => {
             if (password !== undefined && decryptPassword(user.password) === password) {
                 browserRoutes.home(history);
                 setLoginFailed(false);
+                LocalStorage.set('userData', JSON.stringify(user));
+                LocalStorage.set('courses', JSON.stringify(courses));
             }
             if (password !== undefined && decryptPassword(user.password) !== password) {
-                console.log(password, user.password);
+                // console.log(password, user.password);
                 setLoginFailed(true);
             }
         }
-    }, [user, history, password]);
+    }, [user, history, password, courses]);
 
     return (
         <div>

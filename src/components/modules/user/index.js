@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { RiMenu2Line } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { LocalStorage } from '../../helper/localStorage';
 import SideBar from '../sidBar/SideBar';
 
 
 const User = ({menu}) => {
     const [showSidebar, setShowsidebar] = useState(false);
-    const user = useSelector((state) => state.fetchUsers);
+    const user = JSON.parse(LocalStorage.get('userData'));
     
     const onClick = () => {
         setShowsidebar(!showSidebar);

@@ -1,39 +1,18 @@
-import React, { useRef} from 'react';
-import { useSelector } from 'react-redux';
-import enrollTheCourse from './services/enrollHandler';
-import { useDispatch } from 'react-redux';
-import { actionsCreators } from '../../../state';
-import { bindActionCreators } from 'redux';
+import React, { useEffect, useState } from 'react';
+import enrollCourse from './services/enrollHandler';
 import leaveCourse from './services/leaveTheCourse';
+import { LocalStorage } from '../../helper/localStorage';
 
 const AllCourses = () => {
-    const allCourses = useSelector((state) => state.coursesReducer);
-    const user = useSelector((state) => state.fetchUsers);
-    const newEnrolledCourse = useSelector((state) => state.enroll);
-    const leavedCourse = useSelector((state) => state.leave);
-
-    /////////////// COURSES'S ID REF //////////////////////////
-    const enrolledCoursesID = useRef(user.courses);
-
-    ////////////// DISPATCH THE ENROLLED COURSE ID ///////
-    const dispatch = useDispatch();
-    const { enroll,leave } = bindActionCreators(actionsCreators, dispatch);
-
-    //////////// UPDATE THE THE ENROLLED COURSE ID IN THE COURSE'S ID REF /////
-    if (enrolledCoursesID.current.indexOf(newEnrolledCourse) === -1) {
-        enrolledCoursesID.current.push(newEnrolledCourse);
-    }
-    ///////// UPDATE THE LEAVED COURSE IN THE ENROLLED COURSES ID REF //////
-    console.log('leaved course', leavedCourse);
-    if (enrolledCoursesID.current.indexOf(leavedCourse) > -1) {
-        for (let i = 0; i < enrolledCoursesID.current.length; i++){
-            if (enrolledCoursesID.current[i] === leavedCourse) {
-                enrolledCoursesID.current.splice(i, 1);
-                console.log('after removing', enrolledCoursesID.current);
-            }
-        }
-    }
     
+    const allCourses = JSON.parse(LocalStorage.get('courses'));
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        setUser(JSON.parse(LocalStorage.get('userData')));
+    }, []);
+    
+
     return (
         <div>
             {/* <div> */}
@@ -45,22 +24,24 @@ const AllCourses = () => {
                                 <img src={course.cover} alt='cover' className='rounded-xl' />
                                 <div className='ml-3 flex flex-col justify-between'>
                                     <div>
-                                    <p className='font-Poppins'>{course.module}</p>
+                                        <p className='font-Poppins'>{course.module}</p>
                                         <p className='font-Mulish text-xs'>{course.class}</p>
-                                        </div>
+                                    </div>
                                     <div>
                                         {
-                                            enrolledCoursesID.current.indexOf(course.id) === -1 ? <button className='border border-gray-200 mb-2 pl-2 pr-2 font-Mulish text-sm rounded-lg float-right mr-6 bottom-0'
+                                            user !== null && user.courses.indexOf(course.id) === -1 ? <button className='border border-gray-200 mb-2 pl-2 pr-2 font-Mulish text-sm rounded-lg float-right mr-6 bottom-0'
                                                 onClick={() => {
-                                                    enrollTheCourse(course.id, user.id);
-                                                    enroll(course.id)
-                                                }}>Enroll Now</button> :
+                                                    enrollCourse(course.id, user.id);
+                                                }}>
+                                                Enroll Now
+                                            </button> :
                                                 <button className='border border-red-600 mb-2 pl-2 pr-2 font-Mulish text-sm rounded-lg float-right mr-6 bottom-0'
                                                     onClick={() => {
                                                         leaveCourse(course.id, user.id);
-                                                        leave(course.id);
                                                     }}
-                                                >Leave Now</button>
+                                                >
+                                                    Leave Now
+                                                </button>
                                         }
                                     </div>
                                 </div>

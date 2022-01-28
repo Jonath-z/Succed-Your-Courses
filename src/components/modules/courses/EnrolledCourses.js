@@ -1,28 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useSelector } from 'react-redux';
 import { realTimeDB } from '../../services/firebase';
 import '../../../assets/css/enrolledCourse.css';
 import { Link } from 'react-router-dom';
+import { LocalStorage } from '../../helper/localStorage';
 
 const EnrolledCourses = ({flexDirection,marginTop}) => {
     //////////////// GET THE USER'S DATA FROM REDUX //////////
-    const user = useSelector((state) => state.fetchUsers);
-    const leavedCourse = useSelector((state) => state.leave);
+    // const user = JSON.parse(LocalStorage.get('userData'));
 
     // const history = useHistory();
 
     /////////////// GET THE DISPATCHED ENROLLED COURSES TO ADD ID IN "EnrollCourses" COMPONENT//////
     const newEnrolledCourse = useSelector((state) => state.enroll);
+    console.log(newEnrolledCourse);
 
     //////////////// ALL COURSES STORED IN THIS USESTATE///////
     const [allcourse, setAllcourse] = useState();
-
-    //////////// USER COURSES'S REF ///////////////////////////
-    const userCourses = useRef(user.courses);
+    const [user, setUser] = useState(JSON.parse(LocalStorage.get('userData')) || null);
+    // const user = useRef(null)
 
     /////////////// CONSOLE DEBUG//////////////
-    console.log('courses ID', user.courses);
-    console.log('courses', allcourse);
+    // console.log('courses', allcourse);
 
     //////////////// FETCH ALL COURSE FROM FIREBASE ////////////
     useEffect(() => {
@@ -32,27 +31,14 @@ const EnrolledCourses = ({flexDirection,marginTop}) => {
         })
     }, []);
 
-    //////////////////// UPDATE THE NEW ENROLLED COURSE IN THE REF //////////
-    console.log(newEnrolledCourse);
-    if (userCourses.current.indexOf(newEnrolledCourse) === -1) {
-        userCourses.current.push(newEnrolledCourse);
-    }
-
-     ///////// UPDATE THE LEAVED COURSE IN THE  REF //////
-    console.log('lesved course', leavedCourse);
-     if (userCourses.current.indexOf(leavedCourse) > -1) {
-         for (let i = 0; i < userCourses.current.length; i++){
-             console.log('leved', i);
-            if (userCourses.current[i] === leavedCourse) {
-                userCourses.current.splice(i, 1);
-                console.log('after removing', userCourses.current);
-            }
-        }
-     }
-    
-    // const getModuleContent = (courseID) => {
-    //     history.push(`/module/${courseID}`);
-    // }
+    useEffect(() => {
+        // window.addEventListener('storage', () => {
+            const user = JSON.parse(LocalStorage.get('userData'));
+            console.log('useEffect user', user);
+        setUser(user);
+        // user.current = user;
+        // })
+    },[]);
     
     return (
         <div>
@@ -62,7 +48,7 @@ const EnrolledCourses = ({flexDirection,marginTop}) => {
             <div className='ml-5 mr-5'>
                 <ul className={`enrolledCourse-container w-full flex ${flexDirection} rounded-lg`}>
                     {
-                        user.courses !== undefined && user.courses !== 0 && user.courses.map(courseID => {
+                        user !== null && user.courses !== undefined && user.courses !== 0 && user.courses.map(courseID => {
                             return (
                                 <>
                                     {
@@ -74,7 +60,10 @@ const EnrolledCourses = ({flexDirection,marginTop}) => {
                                                     backgroundRepeat: 'no-repeat',
                                                     backgroundPosition: 'center',
                                                     backgroundSize: 'auto',
-                                                }} className={`h-52 w-screen enrolled-course pl-5 pt-5 pr-5 ${marginTop}`}>
+                                                }}
+                                                    className={`h-52 w-screen enrolled-course pl-5 pt-5 pr-5 ${marginTop}`}
+                                                    key={course.id}
+                                                >
                                                     <div className='w-screen'>
                                                         <p className='text-white font-Poppins'>{course.module}</p>
                                                         <p className='text-white font-Mulish'>{course.class}</p>

@@ -51,11 +51,12 @@ export const fetchUsers = (email) => {
 
 ///////////////////// ALL COURSE ////////////////////////////////////////////
 export const getAllCourse = (database) => {
-    console.log(database);
+    // console.log(database);
     return (dispatch) => {
         database.ref('/modules').on('value', (snapshot) => {
             if (snapshot.exists()) {
                 const courses = Object.values(snapshot.val());
+                console.log(courses);
                 dispatch({
                     type: actionsType.ALL_COURSE,
                     payload: courses
@@ -66,11 +67,12 @@ export const getAllCourse = (database) => {
 }
 
 ///////////////////////////// ENROLL TO THE COURSE //////////////////////////////
-export const enroll = (courseID) => {
+export const enroll = (enrolledCourses) => {
+    console.log(enrolledCourses);
     return (dispatch) => {
         dispatch({
             type: actionsType.ENROLL,
-            payload: courseID
+            payload: enrolledCourses
         });
     }
 }
@@ -86,7 +88,7 @@ export const leave = (courseID) => {
 }
 ////////////////// MENU OPTIONS ////////////////////////////////////
 export const myCourse = (menu) => {
-    console.log('menu action', menu);
+    // console.log('menu action', menu);
     return (dispatch) => {
         dispatch({
             type: actionsType.MY_COUSES,

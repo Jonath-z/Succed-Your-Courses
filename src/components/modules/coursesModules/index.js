@@ -5,15 +5,17 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PageNotFound from '../page_not_found';
+import { DispatchAllcourses } from '../../../hooks';
 
-const  ModuleContent = () => {
+const ModuleContent = () => {
+    DispatchAllcourses();
     const [modules, setModules] = useState(null);
     const [moduleID, setModuleID] = useState('');
     const {id} = useParams();
     let history = useHistory();
 
     const user = useSelector((state) => state.fetchUsers);
-    console.log('user-data', user);
+    // console.log('user-data', user);
 
     useEffect(() => {
         setModuleID(id);
@@ -31,7 +33,7 @@ const  ModuleContent = () => {
     return (
         <div>
             {
-                user.courses.includes(moduleID)
+               user.courses !== undefined && user.courses.includes(moduleID)
                     ?
                     (<div>
                         <div className='absolute top-0 left-0 right-0 h-20 bg-2778F0 rounded-bl-3xl rounded-br-3xl'>
@@ -39,7 +41,7 @@ const  ModuleContent = () => {
                                 <div className='mt-2'>
                                     <p>
                                         <AiOutlineArrowLeft className='text-2xl ml-2 text-white mt-1 absolute' onClick={() => {
-                                            history.push(`/welcome/?id=${localStorage.getItem('userID')}`);
+                                            history.goBack();
                                         }} />
                                     </p>
                                     <h1 className='text-2xl flex justify-center item-center text-white mt-2 font-Poppins'>{modules.moduleName}</h1>

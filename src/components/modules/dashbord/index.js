@@ -18,7 +18,7 @@ const Dashbord = () => {
             if (snapshot.exists()) {
                 const requests = Object.values(snapshot.val());
                 setAllRequest(requests);
-                console.log(requests);
+                // console.log(requests);
             }
         })
     },[])
@@ -31,7 +31,7 @@ const Dashbord = () => {
             setUploadState(uploadProgress);
             snapshot.ref.getDownloadURL().then(url => {
                 setModuleCover(url);
-                console.log(url);
+                // console.log(url);
             });
         });
     }

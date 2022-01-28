@@ -16,7 +16,7 @@ const Courses = () => {
             if (snapshot.exists()) {
                 const modules = Object.values(snapshot.val());
                 setAllModule(modules);
-                console.log(modules);
+                // console.log(modules);
             }
         });
     }, []);
@@ -34,7 +34,7 @@ const Courses = () => {
             setUploadState(uploadProgress);
             snapshot.ref.getDownloadURL().then(url => {
                 setAddOptionFileUrl(url);
-                console.log(url);
+                // console.log(url);
             });
         });
     }
