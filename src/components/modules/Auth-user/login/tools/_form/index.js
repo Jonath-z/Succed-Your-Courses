@@ -26,6 +26,7 @@ export const LoginForm = () => {
     }
     useEffect(() => {
         if (user.password !== undefined) {
+            console.log(decryptPassword(user.password));
             if (password !== undefined && decryptPassword(user.password) === password) {
                 browserRoutes.home(history);
                 setLoginFailed(false);
