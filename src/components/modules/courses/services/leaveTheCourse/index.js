@@ -15,8 +15,8 @@ const update = (snapshot,courseID) => {
     });
 }
 
-//////////////////// UPDATE LOCALSTORAGE //////////////////
-const updateLocalStorage = (courseID) => {
+//////////////////// UPDATE LOCALSTORAGE /////////////////////
+export const deleteInLocalStorage = (courseID) => {
     const user = JSON.parse(LocalStorage.get('userData'));
     console.log('courseData', user);
     for (let i = 0; i < user.courses.length; i++){
@@ -25,6 +25,7 @@ const updateLocalStorage = (courseID) => {
             user.courses.splice(i, 1);
             console.log('updated after deletion', user);
             LocalStorage.set('userData', JSON.stringify(user));
+            return JSON.parse(LocalStorage.get('userData'));
         }
     }
 }
@@ -36,7 +37,6 @@ const leaveCourse = (courseID, userID) => {
             update(snapshot, courseID);
         });
     console.log(courseID);
-    updateLocalStorage(courseID);
 }
 
 export default leaveCourse;
