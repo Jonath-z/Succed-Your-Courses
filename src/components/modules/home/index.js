@@ -6,11 +6,12 @@ import EnrolledCourses from '../../modules/courses/EnrolledCourses';
 import { useSelector } from 'react-redux';
 import actionsType from '../../../state/actions/action_types/actionType';
 import { DispatchAllcourses } from '../../../hooks';
+import Account from '../account';
 
 const Home = () => {
     DispatchAllcourses();
     const menuHandler = useSelector((state) => state.menuReducer);
-    // console.log('menu handler', menuHandler);
+
     switch (menuHandler) {
         case actionsType.MY_COUSES:
             return (
@@ -40,9 +41,12 @@ const Home = () => {
             )
         case actionsType.ACCOUNT:
             return (
-                <div className='flex flex-col fixed h-screen w-screen'>
+                <div className='flex flex-col fixed h-screen w-screen overflow-y-scroll'>
                     <div className='fixed top-0 w-screen bg-white'>
                         <User menu={'Account'} />
+                    </div>
+                    <div className='mt-20'>
+                        <Account/>
                     </div>
                 </div>
             )
