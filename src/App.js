@@ -8,6 +8,7 @@ import { createBrowserHistory } from "history";
 import { Router,Route } from "react-router";
 import store from "./state/store/store";
 import { DispatchAllcourses } from "./hooks";
+import UserProvider from "./components/context";
 
 const App = () => {
   DispatchAllcourses();
@@ -15,17 +16,19 @@ const App = () => {
   const history = createBrowserHistory(store);
 
   return (
+    <UserProvider>
       <Router history={history}>
-          <Route path='/' exact>
-            <div className="App">
-              <SplashScreen />
-            </div>
-          </Route>
-          <Route path='/user-authentication' component={AuthIndex} />
-          <Route path='/home' component={Home} />
-          <Route path='/dashbord' component={Dashbord} />
-          <Route path='/module-content/:id' component={ModuleContent} />
+        <Route path='/' exact>
+          <div className="App">
+            <SplashScreen />
+          </div>
+        </Route>
+        <Route path='/user-authentication' component={AuthIndex} />
+        <Route path='/home' component={Home} />
+        <Route path='/dashbord' component={Dashbord} />
+        <Route path='/module-content/:id' component={ModuleContent} />
       </Router>
+    </UserProvider>
   );
 }
 
