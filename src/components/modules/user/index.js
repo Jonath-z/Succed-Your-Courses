@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { RiMenu2Line } from 'react-icons/ri';
-// import { useSelector } from 'react-redux';
-import { LocalStorage } from '../../helper/localStorage';
 import SideBar from '../sidBar/SideBar';
+import { useUser } from '../../context';
 
 
-const User = ({menu}) => {
+const User = ({ menu }) => {
+    
     const [showSidebar, setShowsidebar] = useState(false);
-    const user = JSON.parse(LocalStorage.get('userData'));
+    const user = useUser();
     
     const onClick = () => {
         setShowsidebar(!showSidebar);
@@ -23,7 +23,7 @@ const User = ({menu}) => {
                 <p className='font-Poppins'>{menu}</p>
             </div>
             <div className='h-10 w-10 rounded-full text-white bg-2778F0 text-center flex justify-center items-center'>
-                <p className='font-Poppins'>{user.name.charAt(0).toUpperCase()}</p>
+                <p className='font-Poppins cursor-pointer'>{user.name.charAt(0).toUpperCase()}</p>
             </div>
         </div>
     );
