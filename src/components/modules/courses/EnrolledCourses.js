@@ -3,25 +3,18 @@ import { useSelector } from 'react-redux';
 import { realTimeDB } from '../../services/firebase';
 import '../../../assets/css/enrolledCourse.css';
 import { Link } from 'react-router-dom';
-import { LocalStorage } from '../../helper/localStorage';
+// import { LocalStorage } from '../../helper/localStorage';
+import { useUser } from '../../context';
 
-const EnrolledCourses = ({flexDirection,marginTop}) => {
-    //////////////// GET THE USER'S DATA FROM REDUX //////////
-    // const user = JSON.parse(LocalStorage.get('userData'));
-
-    // const history = useHistory();
-
+const EnrolledCourses = ({ flexDirection, marginTop }) => {
+    const user = useUser();
+    
     /////////////// GET THE DISPATCHED ENROLLED COURSES TO ADD ID IN "EnrollCourses" COMPONENT//////
     const newEnrolledCourse = useSelector((state) => state.enroll);
     console.log(newEnrolledCourse);
 
     //////////////// ALL COURSES STORED IN THIS USESTATE///////
     const [allcourse, setAllcourse] = useState();
-    const [user, setUser] = useState(JSON.parse(LocalStorage.get('userData')) || null);
-    // const user = useRef(null)
-
-    /////////////// CONSOLE DEBUG//////////////
-    // console.log('courses', allcourse);
 
     //////////////// FETCH ALL COURSE FROM FIREBASE ////////////
     useEffect(() => {
@@ -30,15 +23,6 @@ const EnrolledCourses = ({flexDirection,marginTop}) => {
                 setAllcourse(courses);
         })
     }, []);
-
-    useEffect(() => {
-        // window.addEventListener('storage', () => {
-            const user = JSON.parse(LocalStorage.get('userData'));
-            console.log('useEffect user', user);
-        setUser(user);
-        // user.current = user;
-        // })
-    },[]);
     
     return (
         <div>
@@ -48,7 +32,7 @@ const EnrolledCourses = ({flexDirection,marginTop}) => {
             <div className='ml-5 mr-5'>
                 <ul className={`enrolledCourse-container w-full flex ${flexDirection} rounded-lg`}>
                     {
-                        user !== null && user.courses !== undefined && user.courses !== 0 && user.courses.map(courseID => {
+                        user !== undefined && user.courses !== undefined && user.courses !== 0 && user.courses.map(courseID => {
                             return (
                                 <>
                                     {
@@ -67,9 +51,13 @@ const EnrolledCourses = ({flexDirection,marginTop}) => {
                                                     <div className='w-screen'>
                                                         <p className='text-white font-Poppins'>{course.module}</p>
                                                         <p className='text-white font-Mulish'>{course.class}</p>
-                                                        <Link to={`module-content/${courseID}`}><button
-                                                            className='mt-5 border-2 border-white rounded-full text-white font-Mulish pt-1 pl-2 pr-2 pb-1 text-sm'
-                                                        >Open now</button></Link>
+                                                        <Link to={`module-content/${courseID}`}>
+                                                            <button
+                                                                className='mt-5 border-2 border-white rounded-full text-white font-Mulish pt-1 pl-2 pr-2 pb-1 text-sm'
+                                                            >
+                                                                Open now
+                                                            </button>
+                                                        </Link>
                                                     </div>
                                                 </li>
                                             )
