@@ -16,11 +16,12 @@ const update = (snapshot,courseID) => {
 }
 
 //////////////// UPDATE ENROLLED COURSE IN LOCALSTORAGE //////////////
-const updateLocalStorage = (courseID) => {
+export const updateLocalStorage = (courseID) => {
     const user = JSON.parse(LocalStorage.get('userData'));
     user.courses.push(courseID);
     console.log('courses updated', user);
     LocalStorage.set('userData', JSON.stringify(user));
+    return JSON.parse(LocalStorage.get('userData'));
 }
 
 const enrollCourse = (courseID, userID) => {
@@ -29,7 +30,6 @@ const enrollCourse = (courseID, userID) => {
         .then((snapshot) => {
             update(snapshot, courseID);
         });
-    updateLocalStorage(courseID);
 }
 
 export default enrollCourse;
