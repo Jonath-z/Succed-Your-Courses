@@ -1,7 +1,7 @@
 // import { BrowserRouter as Router, Route} from "react-router-dom";
 import Home from "./components/modules/home";
 import Dashbord from "./components/modules/dashbord/index";
-import ModuleContent from './components/modules/coursesModules'
+import CourseContent from './components/modules/courseContent'
 import SplashScreen from './components/modules/_splash-screen/screens/SplashScreen';
 import AuthIndex from './components/modules/Auth-user/AuthIndex';
 import { createBrowserHistory } from "history";
@@ -26,7 +26,7 @@ const App = () => {
         <Route path='/user-authentication' component={AuthIndex} />
         <Route path='/home' component={Home} />
         <Route path='/dashbord' component={Dashbord} />
-        <Route path='/module-content/:id' component={ModuleContent} />
+        <Route path='/module-content/:id' component={CourseContent} />
       </Router>
     </UserProvider>
   );
