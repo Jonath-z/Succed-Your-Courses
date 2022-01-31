@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { realTimeDB } from '../../services/firebase';
 import '../../../assets/css/enrolledCourse.css';
 import { Link } from 'react-router-dom';
-// import { LocalStorage } from '../../helper/localStorage';
+import uuid from 'react-uuid'
 import { useUser } from '../../context';
 
 const EnrolledCourses = ({ flexDirection, marginTop }) => {
@@ -46,7 +46,7 @@ const EnrolledCourses = ({ flexDirection, marginTop }) => {
                                                     backgroundSize: 'auto',
                                                 }}
                                                     className={`h-52 w-screen enrolled-course pl-5 pt-5 pr-5 ${marginTop}`}
-                                                    key={course.id}
+                                                    key={uuid()}
                                                 >
                                                     <div className='w-screen'>
                                                         <p className='text-white font-Poppins'>{course.module}</p>
