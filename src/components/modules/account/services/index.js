@@ -1,4 +1,4 @@
-import { fireStoreDB } from "../../../services/firebase";
+import { fireStoreDB,storageDB } from "../../../services/firebase";
 import encrypt from "../../Auth-user/signup/services/uploadForm/encrypt";
 import { LocalStorage } from "../../../helper/localStorage";
 
@@ -18,6 +18,7 @@ export const updateNewName = (name, userID) => {
     LocalStorage.set('userData',JSON.stringify(user));
 }
 
+
 export const updateNewEmail = (email,userID) => {
     fireStoreDB.collection('users').where('id', '==', userID)
     .get()
@@ -33,6 +34,7 @@ export const updateNewEmail = (email,userID) => {
     user.email = email;
     LocalStorage.set('userData',JSON.stringify(user));
 }
+
 
 export const updateNewPassword = (password, userID) => {
     const encryptPassword = encrypt(password);
@@ -67,3 +69,37 @@ export const updateNewPhone = (phone, userID) => {
     user.phone = phone;
     LocalStorage.set('userData', JSON.stringify(user));
 }
+
+export const uploadPayement = (amount, payementProof, user) => {
+    let ref = storageDB.ref('/Payement').child(`/payement_${Date.now()}`);
+    const file = payementProof;
+    ref.put(file).then((snapshot) => {
+        const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        snapshot.ref.getDownloadURL().then(url => {
+            fireStoreDB.collection('Payement').add({
+                amout: amount,
+                payementProof: url,
+                user: {
+                    name: user.name,
+                    email: user.email
+                }
+            });
+        });
+        return uploadProgress;
+    });
+}
+
+export const deleteAccount = (user) => {
+    fireStoreDB.collection('/users').where('id', '==', user.id)
+    .get()
+    .then(snapshot => {
+        if (!snapshot.empty) {
+            snapshot.forEach(async (doc) => {
+                const ref = fireStoreDB.collection('/users').doc(doc.id);
+                await ref.delete();
+            });
+        }
+    });
+    LocalStorage.clear();
+}
+
