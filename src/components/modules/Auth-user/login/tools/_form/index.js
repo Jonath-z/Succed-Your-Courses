@@ -18,6 +18,7 @@ export const LoginForm = () => {
     const { fetchUsers } = bindActionCreators(actionsCreators, dispatch);
     const user = useSelector((state) => state.fetchUsers);
     const courses = useSelector((state) => state.coursesReducer);
+    console.log(user.password);
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -26,7 +27,6 @@ export const LoginForm = () => {
     }
     useEffect(() => {
         if (user.password !== undefined) {
-            console.log(decryptPassword(user.password));
             if (password !== undefined && decryptPassword(user.password) === password) {
                 browserRoutes.home(history);
                 setLoginFailed(false);
@@ -34,17 +34,21 @@ export const LoginForm = () => {
                 LocalStorage.set('courses', JSON.stringify(courses));
             }
             if (password !== undefined && decryptPassword(user.password) !== password) {
-                // console.log(password, user.password);
+                console.log(password, decryptPassword(`${user.password}`));
                 setLoginFailed(true);
             }
         }
     }, [user, history, password, courses]);
 
+    const InputFucus = () => {
+        setLoginFailed(false);
+    }
+
     return (
         <div>
             <form onSubmit={submitForm} className='flex flex-col justify-center items-center mt-3'>
                 <input type='email' name='email' placeholder='Enter your email adress' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' required />
-                <input type='password' name='password' placeholder='Enter password' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' required />
+                <input type='password' name='password' placeholder='Enter password' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' required  onFocus={InputFucus}/>
                 {loginFailed && <p className='text-red-600 text-sm font-Mulish mt-3'>Wrong password</p>}
                 <LoginButton />
             </form>
