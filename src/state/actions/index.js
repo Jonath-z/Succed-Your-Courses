@@ -51,7 +51,6 @@ export const fetchUsers = (email) => {
 
 ///////////////////// ALL COURSE ////////////////////////////////////////////
 export const getAllCourse = (database) => {
-    // console.log(database);
     return (dispatch) => {
         database.ref('/modules').on('value', (snapshot) => {
             if (snapshot.exists()) {
@@ -108,14 +107,6 @@ export const account = (menu) => {
     return (dispatch) => {
         dispatch({
             type: actionsType.ACCOUNT,
-            payload: menu
-        })
-    }
-}
-export const reportProblem = (menu) => {
-    return (dispatch) => {
-        dispatch({
-            type: actionsType.REPORT_PROBLEM,
             payload: menu
         })
     }
