@@ -27,7 +27,7 @@ const AllCourses = () => {
                                     </div>
                                     <div>
                                         {
-                                            user !== null && user.courses.indexOf(course.id) === -1 ? <button className='border border-gray-200 mb-2 pl-2 pr-2 font-Mulish text-sm rounded-lg float-right mr-6 bottom-0'
+                                            user !== undefined && user.courses.indexOf(course.id) === -1 ? <button className='border border-gray-200 mb-2 pl-2 pr-2 font-Mulish text-sm rounded-lg float-right mr-6 bottom-0'
                                                 onClick={() => {
                                                     enrollCourse(course.id, user.id);
                                                     updateLocalStorage(course.id);
