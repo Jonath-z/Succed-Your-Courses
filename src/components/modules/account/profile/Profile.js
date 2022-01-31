@@ -13,9 +13,10 @@ const Profile = () => {
             <div className='pl-5'>
                 <p className='font-Poppins flex flex-col'>
                 {user.name}
-                <span className='font-Mulish text-xs'>{user.email}</span>
+                    <span className='font-Mulish text-xs'>{user.email}</span>
+                    {user.phone && <span className='font-Mulish text-xs'>{user.phone}</span>}
                 </p>
-                <p className='font-Poppins float-right text-xs text-2778F0 pt-2 cursor-pointer mr-3' onClick={updateProfile}>Update</p>
+                <p className='font-Poppins float-right text-xs text-2778F0 pt-2 cursor-pointer mr-3' onClick={updateProfile}>Update Profile</p>
             </div>
         </div>
     );
