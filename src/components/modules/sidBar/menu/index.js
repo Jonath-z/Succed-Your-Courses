@@ -2,7 +2,6 @@ import React from 'react';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BsBookmark } from 'react-icons/bs';
 import { FiUser } from 'react-icons/fi';
-import { FiAlertTriangle } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionsCreators } from '../../../../state';
@@ -11,7 +10,7 @@ import { AiOutlineHome } from 'react-icons/ai';
 
 const Menu = () => {
     const dispatch = useDispatch();
-    const { myCourse, exploreCourse, account, reportProblem,home } = bindActionCreators(actionsCreators, dispatch);
+    const { myCourse, exploreCourse, account,home } = bindActionCreators(actionsCreators, dispatch);
     return (
         <div>
             <ul className='flex flex-col mt-5 font-Mulish'>
@@ -35,11 +34,6 @@ const Menu = () => {
                     onClick={() => { account(actionsType.ACCOUNT) }}>
                     <FiUser className='text-2xl' />
                     <span className='ml-2'>Account</span>
-                </li>
-                <li className='flex flex-row items-center mt-3 cursor-pointer'
-                    onClick={() => { reportProblem(actionsType.REPORT_PROBLEM) }}>
-                    <FiAlertTriangle className='text-2xl' />
-                    <span className='ml-2'>Report a problem</span>
                 </li>
             </ul>
         </div>
