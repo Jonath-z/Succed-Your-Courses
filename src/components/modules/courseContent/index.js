@@ -59,13 +59,13 @@ const CourseContent = () => {
                                         <div key={course.optionName} className='mt-5 pt-3 pb-3 pl-3 pr-1 ml-4  mr-4 shadow-lg'>
                                             <p className='font-Mulish' onClick={toggleIframe}>{course.description}</p>
                                             {!iframe && <div>
-                                                <embed src={`${course.file}?page=hsn#toolbar=0`} width={'100%'} height={'500'}></embed>
-                                                {/* <iframe
+                                                {/* <embed src={`${course.file}?page=hsn#toolbar=0`} width={'100%'} height={'500'}></embed> */}
+                                                <iframe
                                                     title={course.description}
                                                     src={`${course.file}?page=hsn#toolbar=0`}
                                                     width={'100%'}
                                                     height={'500'}
-                                                ></iframe> */}
+                                                ></iframe>
                                             </div>}
                                         </div>
                                     );
