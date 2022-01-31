@@ -1,8 +1,20 @@
 import React from 'react';
 import Profile from './profile/Profile';
 import Settings from './setttings';
+import { useHistory } from 'react-router-dom';
+import browserRoutes from '../../../router/_broswerRoute/router';
+import { LocalStorage } from '../../helper/localStorage';
+import { deleteAccount } from './services';
+import { useUser } from '../../context';
 
 const Account = () => {
+    const history = useHistory();
+    const user = useUser();
+    const logout = () => {
+        browserRoutes.defaulRoute(history);
+        LocalStorage.clear();
+    }
+
     return (
         <div className=' flex flex-col overflow-y-scroll'>
             <p className='font-Poppins text-xl mt-1 ml-2 mb-2'>Profile</p>
@@ -12,8 +24,13 @@ const Account = () => {
                 <Settings/>
             </div>
             <div  className='mt-20 ml-3 pb-4'>
-                <p className='font-Poppins'>Logout</p>
-                <p className='font-Poppins text-red-600 mt-2'>Delete Account</p>
+                <p className='font-Poppins cursor-pointer' onClick={logout}>Logout</p>
+                <p className='font-Poppins text-red-600 mt-2 cursor-pointer'
+                    onClick={() => {
+                        deleteAccount(user);
+                        browserRoutes.defaulRoute(history);
+                    }}
+                >Delete Account</p>
             </div>
         </div>
     );
