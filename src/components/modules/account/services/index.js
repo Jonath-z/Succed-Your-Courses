@@ -1,6 +1,7 @@
-import { fireStoreDB,storageDB } from "../../../services/firebase";
+import { fireStoreDB,storageDB,realTimeDB } from "../../../services/firebase";
 import encrypt from "../../Auth-user/signup/services/uploadForm/encrypt";
 import { LocalStorage } from "../../../helper/localStorage";
+import uuid from "react-uuid";
 
 export const updateNewName = (name, userID) => {
     fireStoreDB.collection('/users').where('id', '==', userID)
@@ -76,7 +77,9 @@ export const uploadPayement = (amount, payementProof, user) => {
     ref.put(file).then((snapshot) => {
         const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         snapshot.ref.getDownloadURL().then(url => {
-            fireStoreDB.collection('Payement').add({
+            const id = uuid()
+            realTimeDB.ref('request').child(id).set({
+                id: id,
                 amout: amount,
                 payementProof: url,
                 user: {
@@ -84,9 +87,9 @@ export const uploadPayement = (amount, payementProof, user) => {
                     email: user.email
                 }
             });
+            return uploadProgress;
         });
-        return uploadProgress;
-    });
+    });       
 }
 
 export const deleteAccount = (user) => {

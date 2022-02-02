@@ -6,7 +6,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import PageNotFound from '../page_not_found';
 import { useUser } from '../../context';
 import uuid from 'react-uuid';
-// import { Document, Page } from 'react-pdf';
 
 const CourseContent = () => {
     const [modules, setModules] = useState(null);
@@ -60,13 +59,21 @@ const CourseContent = () => {
                                         <div key={uuid()} className='mt-5 pt-3 pb-3 pl-3 pr-1 ml-4  mr-4 shadow-lg'>
                                             <p className='font-Mulish' onClick={toggleIframe}>{course.description}</p>
                                             {!iframe && <div>
+                                                <iframe
+                                                    title='description'
+                                                    src={`https://docs.google.com/viewer?url=https://www2.cortland.edu/dotAsset/131973.pdf&embedded=true`}
+                                                    style={{
+                                                        width: '100%',
+                                                        height: '650px'
+                                                    }}
+                                                    frameborder="0"></iframe>
                                                 {/* <iframe
                                                     title={course.description}
                                                     src={course.file}
                                                     width={'100%'}
                                                     height={'500'}
                                                 ></iframe> */}
-                                                <object title='data' data={course.file} width={'100%'} height={'500'}></object>
+                                                {/* <object title='data' data={course.file} width={'100%'} height={'500'}></object> */}
                                             </div>
                                             }
                                         </div>
@@ -81,8 +88,7 @@ const CourseContent = () => {
                                 statusDescription={'No modules found for this course !'}
                             />
                         </div>
-                    )
-                                        
+                    )                          
             }
         </div>
     );
