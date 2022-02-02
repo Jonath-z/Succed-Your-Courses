@@ -3,7 +3,8 @@ import enrollCourse,{updateLocalStorage} from './services/enrollHandler';
 import { deleteInLocalStorage } from './services/leaveTheCourse';
 import leaveCourse from './services/leaveTheCourse';
 import { LocalStorage } from '../../helper/localStorage';
-import { useUser,useUpdateUser } from '../../context';
+import { useUser, useUpdateUser } from '../../context';
+import uuid from 'react-uuid';
  
 const AllCourses = () => {
     
@@ -17,7 +18,7 @@ const AllCourses = () => {
             {
                 allCourses.map(course => {
                     return (
-                        <div key={course.id} className={'mt-4 shadow-lg border-gray-200 border-2 ml-4 mr-4 rounded-xl overflow-y-scroll'}>
+                        <div key={uuid()} className={'mt-4 shadow-lg border-gray-200 border-2 ml-4 mr-4 rounded-xl overflow-y-scroll'}>
                             <div className='grid grid-cols-2 pt-2 pb-3 pl-2'>
                                 <img src={course.cover} alt='cover' className='rounded-xl' />
                                 <div className='ml-3 flex flex-col justify-between'>

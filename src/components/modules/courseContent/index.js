@@ -5,6 +5,8 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useHistory, useParams } from 'react-router-dom';
 import PageNotFound from '../page_not_found';
 import { useUser } from '../../context';
+import uuid from 'react-uuid';
+// import { Document, Page } from 'react-pdf';
 
 const CourseContent = () => {
     const [modules, setModules] = useState(null);
@@ -12,7 +14,6 @@ const CourseContent = () => {
     const [iframe,setIframe] = useState(false)
     const { id } = useParams();
     let history = useHistory();
-
     const user = useUser();
 
     useEffect(() => {
@@ -36,7 +37,7 @@ const CourseContent = () => {
     return (
         <div>
             {
-               user !== undefined && user.courses.includes(moduleID)
+                user !== undefined && user.courses.includes(moduleID)
                     ?
                     (<div>
                         <div className='absolute top-0 left-0 right-0 h-20 bg-2778F0 rounded-bl-3xl rounded-br-3xl'>
@@ -56,28 +57,31 @@ const CourseContent = () => {
                             {
                                 modules !== null && modules.option.map(course => {
                                     return (
-                                        <div key={course.optionName} className='mt-5 pt-3 pb-3 pl-3 pr-1 ml-4  mr-4 shadow-lg'>
+                                        <div key={uuid()} className='mt-5 pt-3 pb-3 pl-3 pr-1 ml-4  mr-4 shadow-lg'>
                                             <p className='font-Mulish' onClick={toggleIframe}>{course.description}</p>
                                             {!iframe && <div>
-                                                {/* <embed src={`${course.file}?page=hsn#toolbar=0`} width={'100%'} height={'500'}></embed> */}
-                                                <iframe
+                                                {/* <iframe
                                                     title={course.description}
-                                                    src={`${course.file}?page=hsn#toolbar=0`}
+                                                    src={course.file}
                                                     width={'100%'}
                                                     height={'500'}
-                                                ></iframe>
-                                            </div>}
+                                                ></iframe> */}
+                                                <object title='data' data={course.file} width={'100%'} height={'500'}></object>
+                                            </div>
+                                            }
                                         </div>
                                     );
                                 })
                             }
                         </div>
                     </div>) :
-                    (<div className='flex justify-center items-center absolute w-screen h-screen'>
-                        <PageNotFound
-                            statusDescription={'No modules found for this course !'}
-                        />
-                    </div>)
+                    (
+                        <div className='flex justify-center items-center absolute w-screen h-screen'>
+                            <PageNotFound
+                                statusDescription={'No modules found for this course !'}
+                            />
+                        </div>
+                    )
                                         
             }
         </div>

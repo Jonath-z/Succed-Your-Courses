@@ -9,22 +9,30 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import browserRoutes from '../../../../../../router/_broswerRoute/router';
 import { LocalStorage } from '../../../../../helper/localStorage';
+import { useUpdateUser } from '../../../../../context';
 
 export const LoginForm = () => {
     const history = useHistory();
+    const updateUser = useUpdateUser();
+
     const [password, setPassword] = useState();
     const [loginFailed, setLoginFailed] = useState(false);
+    const [isDisable, setIsDisable] = useState(false);
+
     const dispatch = useDispatch();
     const { fetchUsers } = bindActionCreators(actionsCreators, dispatch);
+
     const user = useSelector((state) => state.fetchUsers);
     const courses = useSelector((state) => state.coursesReducer);
-    console.log(user.password);
 
     const submitForm = (e) => {
         e.preventDefault();
         fetchUsers(handleLoginSubmit(e).email);
         setPassword(handleLoginSubmit(e).password);
+        setIsDisable(true); 
+        updateUser();
     }
+
     useEffect(() => {
         if (user.password !== undefined) {
             if (password !== undefined && decryptPassword(user.password) === password) {
@@ -32,6 +40,7 @@ export const LoginForm = () => {
                 setLoginFailed(false);
                 LocalStorage.set('userData', JSON.stringify(user));
                 LocalStorage.set('courses', JSON.stringify(courses));
+                setIsDisable(false);
             }
             if (password !== undefined && decryptPassword(user.password) !== password) {
                 console.log(password, decryptPassword(`${user.password}`));
@@ -50,7 +59,9 @@ export const LoginForm = () => {
                 <input type='email' name='email' placeholder='Enter your email adress' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' required />
                 <input type='password' name='password' placeholder='Enter password' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' required  onFocus={InputFucus}/>
                 {loginFailed && <p className='text-red-600 text-sm font-Mulish mt-3'>Wrong password</p>}
-                <LoginButton />
+                <LoginButton
+                    isDisabled={isDisable}
+                />
             </form>
         </div>
     );
