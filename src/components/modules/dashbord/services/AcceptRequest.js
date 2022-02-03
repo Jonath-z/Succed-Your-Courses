@@ -26,7 +26,7 @@ export const acceptRequest = async (requestID, user) => {
                 snapshot.forEach(async (doc) => {
                     if (doc.data()) {
                         const ref = fireStoreDB.collection("/users").doc(`${doc.id}`);
-                        await ref.set({
+                        await ref.update({
                             token: token.token
                         }, { merge: true });
                     };

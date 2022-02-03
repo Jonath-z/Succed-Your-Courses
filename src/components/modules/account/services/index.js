@@ -78,7 +78,7 @@ export const uploadPayement = (amount, payementProof, user) => {
         const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         snapshot.ref.getDownloadURL().then(url => {
             const id = uuid()
-            realTimeDB.ref('request').child(id).set({
+            realTimeDB.ref('/request').child(id).set({
                 id: id,
                 amout: amount,
                 payementProof: url,

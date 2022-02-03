@@ -36,7 +36,7 @@ const AllCourses = () => {
                                                 }}>
                                                 Enroll Now
                                             </button> :
-                                                <button className='border border-red-600 mb-2 pl-2 pr-2 font-Mulish text-sm rounded-lg float-right mr-6 bottom-0'
+                                                <button className='text-red-600  mb-2 pl-2 pr-2 font-Poppins text-sm rounded-lg float-right mr-6 bottom-0'
                                                     onClick={() => {
                                                         leaveCourse(course.id, user.id);
                                                         deleteInLocalStorage(course.id);

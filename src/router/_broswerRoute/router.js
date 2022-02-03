@@ -10,9 +10,14 @@ const defaulRoute = (history) => {
     history.push('/');
 }
 
+const courseContent = (history,courseID) => {
+    history.push(`/module-content/${courseID}`);
+}
+
 const browserRoutes = {
     auth: authRoute,
     home: homeRoute,
-    defaulRoute: defaulRoute
+    defaulRoute: defaulRoute,
+    courseContent: courseContent
 }
 export default browserRoutes;
