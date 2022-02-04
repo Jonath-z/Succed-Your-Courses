@@ -72,12 +72,12 @@ export const updateNewPhone = (phone, userID) => {
 }
 
 export const uploadPayement = (amount, payementProof, user) => {
+    const id = uuid();
     let ref = storageDB.ref('/Payement').child(`/payement_${Date.now()}`);
     const file = payementProof;
     ref.put(file).then((snapshot) => {
         const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         snapshot.ref.getDownloadURL().then(url => {
-            const id = uuid()
             realTimeDB.ref('/request').child(id).set({
                 id: id,
                 amout: amount,

@@ -1,8 +1,8 @@
-import browserRoutes from "../../../../../router/_broswerRoute/router";
+import { verifyToken as verifyTokenRoute } from "../../../../../router/_API-Route";
 
-const verifyToken = async (user,courseID,history) => {
+const verifyToken = async (user) => {
     console.log(user);
-    const verifyToken = await fetch('http://localhost:3000/api/v1/verifyToken', {
+    const verifyToken = await fetch(verifyTokenRoute, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
@@ -17,12 +17,12 @@ const verifyToken = async (user,courseID,history) => {
     console.log(response);
 
     if (response.experied) {
-        alert(`You don't have access to the module, update your payement plan`);
+        // alert(`You don't have access to the module, update your payement plan`);
+        return response.experied;
     }
     else {
-        
+        return response.experied;
     }
-    browserRoutes.courseContent(history, courseID);
 }
 
 export default verifyToken;

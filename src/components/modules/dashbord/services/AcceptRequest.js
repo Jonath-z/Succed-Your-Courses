@@ -1,9 +1,10 @@
+import { getToken } from "../../../../router/_API-Route";
 import { fireStoreDB,realTimeDB } from "../../../services/firebase";
 // import uuid from "react-uuid";
 
 export const acceptRequest = async (requestID, user) => {
     
-    const requestToken = await fetch('http://localhost:3000/api/v1/getToken', {
+    const requestToken = await fetch(getToken, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
