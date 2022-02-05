@@ -1,5 +1,5 @@
 import React from 'react';
-import { imageObject } from '../../_splash-screen/tools/images';
+import { imageObject } from '../../../../static/images';
 
 const Welcome = () => {
     return (

@@ -5,14 +5,12 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useHistory, useParams } from 'react-router-dom';
 import PageNotFound from '../page_not_found';
 import { useUser } from '../../context';
-import uuid from 'react-uuid';
 import verifyToken from '../courses/services/openCourse';
-import { imageObject } from '../_splash-screen/tools/images';
+import { imageObject } from '../../../static/images';
 
 const CourseContent = () => {
     const [modules, setModules] = useState(null);
     const [moduleID, setModuleID] = useState('');
-    const [iframe, setIframe] = useState(false);
     const [expiredTokem, setExpiredToken] = useState(null);
     const { id } = useParams();
     let history = useHistory();
@@ -40,8 +38,13 @@ const CourseContent = () => {
         })();
     }, [user]);
 
-    const toggleIframe = () => {
-        setIframe(!iframe);
+    const toggleIframe = (e) => {
+        const container = e.target.parentNode.querySelectorAll('.Iframe');
+        if (container[0].style.display === 'none') {
+            container[0].style.display = 'block';
+        } else {
+            container[0].style.display = 'none';
+        }
     }
 
     return (
@@ -77,24 +80,16 @@ const CourseContent = () => {
                                 {
                                     modules !== null && modules.option.map(course => {
                                         return (
-                                            <div key={uuid()} className='mt-5 pt-3 pb-3 pl-3 pr-1 ml-4  mr-4 shadow-lg'>
+                                            <div className='mt-5 pt-3 pb-3 pl-3 pr-1 ml-4  mr-4 shadow-lg border rounded-lg' key={course.id}>
                                                 <p className='font-Mulish' onClick={toggleIframe}>{course.description}</p>
-                                                {!iframe && <div>
-                                                    {/* <iframe
-                                                        title='description'
-                                                        src={`https://docs.google.com/viewer?url=https://drive.google.com/file/d/1DKMxFSMik-OuwKcnQjv0f5s3QImYOZ99/view?usp=sharing&embedded=true`}
-                                                        style={{
-                                                            width: '100%',
-                                                            height: '650px'
-                                                        }}
-                                                        frameborder="0"></iframe> */}
+                                                {<div className='Iframe'>
                                                     <iframe
                                                         title={course.description}
-                                                        src="https://drive.google.com/file/d/1DKMxFSMik-OuwKcnQjv0f5s3QImYOZ99/preview"
+                                                        src={`${course.file}`}
                                                         width="100%"
                                                         height="650"
-                                                        allow="autoplay"></iframe>
-                                                    {/* <object title='data' data={course.file} width={'100%'} height={'500'}></object> */}
+                                                        // allow="autoplay"
+                                                    ></iframe>
                                                 </div>
                                                 }
                                             </div>

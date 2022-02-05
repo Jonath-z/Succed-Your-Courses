@@ -1,5 +1,5 @@
 import React from 'react';
-import { imagesArray } from '../tools/images';
+import { imagesArray } from '../../../../static/images';
 import NextButton from '../tools/buttons/NextButton';
 import GetStaredButton from '../tools/buttons/GetStaredButton';
 import { lenght } from '../services/nextHundler';

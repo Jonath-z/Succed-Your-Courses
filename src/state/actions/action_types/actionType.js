@@ -12,7 +12,7 @@ const actionsType = {
     MY_COUSES: "MY_COURSES",
     ACCOUNT: "ACCOUNT",
     REPORT_PROBLEM: "REPORT_PROBLEM",
-    HOME: "HOME"
+    HOME: "HOME",
 }
 
 export default actionsType;

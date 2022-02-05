@@ -1,5 +1,5 @@
 import React from 'react';
-import { realTimeDB,storageDB } from '../../services/firebase';
+import { realTimeDB } from '../../services/firebase';
 import { useState, useEffect } from 'react';
 import deleteCourse from './services/Delete';
 import addModules from './services/addModule';
@@ -7,8 +7,7 @@ import addModules from './services/addModule';
 const Courses = () => {
     const [allModule, setAllModule] = useState();
     const [addOptionName, setAddOptionName] = useState('');
-    const [addOptionFileUrl, setAddOptionFileUrl] = useState('');
-    const [uploadState, setUploadState] = useState(0);
+    const [coursePdfUrl, setCoursePdfUrl] = useState('');
 
     // ///////////////////////// GET ALL MODULES FROM DB //////////////////////////////////////
     useEffect(() => {
@@ -26,17 +25,8 @@ const Courses = () => {
         setAddOptionName(e.target.value);
     }
 ///////////////////////// STORE MODULES DOCUMENT IN STORAGE DB //////////////////////////////////////
-    let ref = storageDB.ref('/module-doc').child(`/module-doc_${Date.now()}`);
-    const uploadFileHandler = (e) => {
-        const file = e.target.files[0];
-        ref.put(file).then((snapshot) => {
-            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setUploadState(uploadProgress);
-            snapshot.ref.getDownloadURL().then(url => {
-                setAddOptionFileUrl(url);
-                // console.log(url);
-            });
-        });
+    const coursePdfHandler = (e) => {
+        setCoursePdfUrl(e.target.value);
     }
 
     return (
@@ -54,12 +44,11 @@ const Courses = () => {
                              <div className='mt-4 font-Mulish'>
                                 <input type='text' placeholder='assignement,model question,...' className='border rounded-b-sm border-gray-700 w-96 pt-2 pb-2 p-3
                                 ' onChange={optionNameHandeler} />
-                                <h5>Uploaded {uploadState}%</h5>
-                                <input type='file' placeholder='upload file' className='border rounded-b-sm border-gray-900 w-96 pt-2 pb-2 pl-3' onChange={uploadFileHandler} />
-                                {addOptionFileUrl !== '' &&
+                                <input type='text' placeholder='upload file' className='border rounded-b-sm border-gray-900 w-96 pt-2 pb-2 pl-3' onChange={coursePdfHandler} />
+                                {coursePdfUrl !== '' &&
                                     // <div className='flex justify-center items-center'>
                                         <button type='button' className='border rounded-lg  w-96 bg-2778F0 text-white pt-2 pb-2 pl-1 pr-1 mr-2 mt-4' onClick={() => {
-                                            addModules(course, addOptionFileUrl, addOptionName,setAddOptionName,setAddOptionFileUrl);
+                                            addModules(course, coursePdfUrl, addOptionName,setAddOptionName,setCoursePdfUrl);
                                            }}>Add</button>
                                     // </div>
                                 }

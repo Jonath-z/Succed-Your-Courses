@@ -1,16 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import User from '../user';
 import AllCourses from '../../modules/courses/AllCourses';
 import Search from '../search';
 import EnrolledCourses from '../../modules/courses/EnrolledCourses';
 import { useSelector } from 'react-redux';
 import actionsType from '../../../state/actions/action_types/actionType';
-import { DispatchAllcourses } from '../../../hooks';
+// import { DispatchAllcourses } from '../../../hooks';
 import Account from '../account';
+import { IoIosArrowDown } from 'react-icons/io';
+import SearchedCourses from '../search/SearchedCourses';
 
 const Home = () => {
-    DispatchAllcourses();
     const menuHandler = useSelector((state) => state.menuReducer);
+    const [isSearch, setIsSearch] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+
+    
+    // DispatchAllcourses();
+
+    const onFucus = () => {
+        setIsSearch(true);
+    }
+    const noFucus = () => {
+        setIsSearch(false);
+    }
+
+    const onChange = (e) => {
+        // console.log(e.target.value.toUpperCase());
+        setInputValue(e.target.value.toUpperCase())
+    }
 
     switch (menuHandler) {
         case actionsType.MY_COUSES:
@@ -46,7 +64,7 @@ const Home = () => {
                         <User menu={'Account'} />
                     </div>
                     <div className='mt-20'>
-                        <Account/>
+                        <Account />
                     </div>
                 </div>
             )
@@ -66,14 +84,24 @@ const Home = () => {
                             <User menu={'Home'} />
                         </div>
                         <div className='mt-20'>
-                            <EnrolledCourses flexDirection={'flex-row'}/>
+                            {!isSearch && <EnrolledCourses flexDirection={'flex-row'} />}
                         </div>
-                        <div>
-                            <Search />
+                        <div className='flex flex-row justify-center items-center'>
+                            {isSearch && <IoIosArrowDown className='text-3xl mt-7 mr-3' onClick={noFucus} />}
+                            <Search
+                                onFocus={onFucus}
+                                onChange={onChange}
+                            />
                         </div>
                         <p className='font-Poppins ml-5 mt-5 pb-1'>All course</p>
                         <div className='pb-20 overflow-y-scroll'>
-                            <AllCourses />
+                            {!isSearch ?
+                                <AllCourses /> :
+                                <SearchedCourses
+                                    inputValue={inputValue}
+                                />
+                            
+                            }
                         </div>
                     </div>
                 </>
@@ -85,14 +113,24 @@ const Home = () => {
                         <User menu={'Home'} />
                     </div>
                     <div className='mt-20'>
-                        <EnrolledCourses flexDirection={'flex-row'} />
+                        {!isSearch && <EnrolledCourses flexDirection={'flex-row'} />}
                     </div>
-                    <div>
-                        <Search />
+                    <div className='flex flex-row justify-center items-start'>
+                        {isSearch && <IoIosArrowDown className='text-3xl mt-7 mr-3' onClick={noFucus} />}
+                        <Search
+                            onFocus={onFucus}
+                            onChange={onChange}
+                        />
                     </div>
                     <p className='font-Poppins ml-5 mt-5 pb-1'>All course</p>
                     <div className='pb-20 overflow-y-scroll'>
-                        <AllCourses />
+                        {!isSearch ?
+                            <AllCourses /> :
+                            <SearchedCourses
+                                inputValue={inputValue}
+                            />
+                            
+                        }
                     </div>
                 </div>
             )

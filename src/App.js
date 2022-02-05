@@ -11,7 +11,7 @@ import { DispatchAllcourses } from "./hooks";
 import UserProvider from "./components/context";
 
 const App = () => {
-  DispatchAllcourses();
+    DispatchAllcourses();
 
   const history = createBrowserHistory(store);
 
