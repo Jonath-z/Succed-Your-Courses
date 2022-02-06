@@ -10,10 +10,11 @@ module.exports = {
       // md: '768px',
       // lg: '1024px',
       // xl: '1280px',
-      '2xl': '1536px',
+      // '2xl': '1536px',
       'xsm': {'min':'300px', 'max':'399px'},
       'sm': {'min': '400px', 'max': '767px'},
-      'md': {'min': '768px', 'max': '1023px'},
+      'md': { 'min': '768px', 'max': '1023px' },
+      // '2md': {'min':'810px', 'max': ''}
       'lg': {'min': '1024px', 'max': '1279px'},
       'xl': { 'min': '1280px', 'max': '1535px' },
       // 'min': '1280px

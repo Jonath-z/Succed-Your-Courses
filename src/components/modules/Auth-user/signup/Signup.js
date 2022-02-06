@@ -11,7 +11,7 @@ const Signup = () => {
         <div>
             <div className='flex flex-col justify-center items-center'>
                 <div>
-                    <p className='text-2xl font-extrabold font-Poppins mt-20'>Welcome abroad</p>
+                    <p className='text-2xl 2xl:text-3xl xl:text-3xl font-extrabold font-Poppins mt-20'>Welcome <span className='2xl:text-2778F0'>abroad</span></p>
                 </div>
                 <div>
                     <SignupForm />

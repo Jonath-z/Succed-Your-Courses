@@ -29,10 +29,10 @@ const SignupForm = () => {
     return (
         <div>
             <form onSubmit={submitForm} className='flex flex-col justify-center items-center mt-3'>
-                <input type='text' name='name' placeholder='Enter your full name' required className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' />
-                <input type='email' name='email' placeholder='Enter your email adress' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' required />
-                <input type='password' name='password' placeholder='Enter password' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' required />
-                <input type='password' name='confirmedPassword' placeholder='Confirm Pasword' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 mt-5 outlinne-none' required />
+                <input type='text' name='name' placeholder='Enter your full name' required className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 2xl:w-80 xl:w-80 lg:w-80 md:w-80 mt-5 outlinne-none' />
+                <input type='email' name='email' placeholder='Enter your email adress' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 2xl:w-80 xl:w-80 lg:w-80 md:w-80 mt-5 outlinne-none' required />
+                <input type='password' name='password' placeholder='Enter password' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 2xl:w-80 xl:w-80 lg:w-80 md:w-80 mt-5 outlinne-none' required />
+                <input type='password' name='confirmedPassword' placeholder='Confirm Pasword' className='border border-gray-300 h-10 font-Mulish rounded-3xl pl-7 w-72 2xl:w-80 xl:w-80 lg:w-80 md:w-80 mt-5 outlinne-none' required />
                 {isWrongPassword && <p className='text-red-600 text-sm font-Mulish mt-3'>Wrong password</p>}
                 <RegisterButton/>
             </form>

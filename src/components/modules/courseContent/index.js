@@ -11,7 +11,7 @@ import { imageObject } from '../../../static/images';
 const CourseContent = () => {
     const [modules, setModules] = useState(null);
     const [moduleID, setModuleID] = useState('');
-    const [expiredTokem, setExpiredToken] = useState(null);
+    const [expiredToken, setExpiredToken] = useState(null);
     const { id } = useParams();
     let history = useHistory();
     const user = useUser();
@@ -51,17 +51,19 @@ const CourseContent = () => {
         <div>
             {
                 user !== undefined && user.courses.includes(moduleID) ?
-                    (!expiredTokem ?
+                    (!expiredToken ?
                         <div>
                             <div className='absolute top-0 left-0 right-0 h-20 bg-2778F0 rounded-bl-3xl rounded-br-3xl'>
-                                {modules !== null &&
+                                {
+                                    modules !== null &&
                                     <div className='mt-2'>
                                         <p>
                                             <AiOutlineArrowLeft
                                                 className='text-2xl ml-2 text-white mt-1 absolute'
                                                 onClick={() => {
                                                     history.goBack();
-                                                }} />
+                                                }}
+                                            />
                                         </p>
                                         <h1
                                             className='text-2xl flex justify-center item-center text-white mt-2 font-Poppins'
@@ -88,7 +90,7 @@ const CourseContent = () => {
                                                         src={`${course.file}`}
                                                         width="100%"
                                                         height="650"
-                                                        // allow="autoplay"
+                                                    // allow="autoplay"
                                                     ></iframe>
                                                 </div>
                                                 }
@@ -100,7 +102,7 @@ const CourseContent = () => {
                         </div> :
                         (
                             <div className='flex flex-col justify-center items-center absolute w-screen h-screen'>
-                                <img src={imageObject.ACCESS_DENIED} alt='page not found' className='w-96'/>
+                                <img src={imageObject.ACCESS_DENIED} alt='page not found' className='w-96' />
                                 <p className='mt-4 font-Poppins text-center text-sm'>
                                     Please update Your payement to get access to this course
                                 </p>
@@ -118,5 +120,4 @@ const CourseContent = () => {
     );
 }
 
-export default CourseContent
-;
+export default CourseContent;
