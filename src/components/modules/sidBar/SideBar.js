@@ -6,7 +6,8 @@ import { useUser } from '../../context';
 const SideBar = ({hideMenu}) => {
     const user = useUser();
     return (
-            <div className='absolute top-5 lef-0 bg-white flex flex-col justify-center items-center pl-5 pr-5 pt-5 pb-5 shadow-2xl rounded-r-lg' onBlur={() => { console.log('blur') }}>
+        <div
+            className='absolute 2xl:block top-5 lef-0 bg-white flex flex-col justify-center items-center pl-5 pr-5 pt-5 pb-5 shadow-2xl rounded-r-lg' onBlur={() => { console.log('blur') }}>
                 <div className='w-full'>
                     <IoCloseOutline onClick={hideMenu} className='mb-5 float-right text-2xl font-Mulish cursor-pointer' />
                 </div>

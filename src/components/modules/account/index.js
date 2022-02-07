@@ -16,14 +16,14 @@ const Account = () => {
     }
 
     return (
-        <div className=' flex flex-col overflow-y-scroll'>
+        <div className=' flex flex-col sm:overflow-y-scroll xsm:overflow-y-scroll 2xl:w-2/6 md:w-2/3'>
             <p className='font-Poppins text-xl mt-1 ml-2 mb-2'>Profile</p>
             <Profile />
             <div className='mt-10'>
                 <p className='font-Poppins text-xl mt-1 ml-2 mb-2'>Settings</p>
-                <Settings/>
+                <Settings />
             </div>
-            <div  className='mt-20 ml-3 pb-4'>
+            <div className='mt-20 ml-3 pb-4'>
                 <p className='font-Poppins cursor-pointer' onClick={logout}>Logout</p>
                 <p className='font-Poppins text-red-600 mt-2 cursor-pointer'
                     onClick={() => {

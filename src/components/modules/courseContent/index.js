@@ -7,6 +7,7 @@ import PageNotFound from '../page_not_found';
 import { useUser } from '../../context';
 import verifyToken from '../courses/services/openCourse';
 import { imageObject } from '../../../static/images';
+import MediaQuery from 'react-responsive';
 
 const CourseContent = () => {
     const [modules, setModules] = useState(null);
@@ -52,14 +53,14 @@ const CourseContent = () => {
             {
                 user !== undefined && user.courses.includes(moduleID) ?
                     (!expiredToken ?
-                        <div>
-                            <div className='absolute top-0 left-0 right-0 h-20 bg-2778F0 rounded-bl-3xl rounded-br-3xl'>
+                        <div className='2xl:flex 2xl:justify-center 2xl:w-full'>
+                            <div className='absolute top-0 left-0 right-0 h-20 bg-2778F0 rounded-bl-3xl rounded-br-3xl 2xl:rounded-none'>
                                 {
                                     modules !== null &&
                                     <div className='mt-2'>
                                         <p>
                                             <AiOutlineArrowLeft
-                                                className='text-2xl ml-2 text-white mt-1 absolute'
+                                                className='text-2xl ml-2 text-white mt-1 absolute cursor-pointer 2xl:ml-5 2xl:top-5'
                                                 onClick={() => {
                                                     history.goBack();
                                                 }}
@@ -82,18 +83,32 @@ const CourseContent = () => {
                                 {
                                     modules !== null && modules.option.map(course => {
                                         return (
-                                            <div className='mt-5 pt-3 pb-3 pl-3 pr-1 ml-4  mr-4 shadow-lg border rounded-lg' key={course.id}>
-                                                <p className='font-Mulish' onClick={toggleIframe}>{course.description}</p>
-                                                {<div className='Iframe'>
-                                                    <iframe
-                                                        title={course.description}
-                                                        src={`${course.file}`}
-                                                        width="100%"
-                                                        height="650"
-                                                    // allow="autoplay"
-                                                    ></iframe>
+                                            <div className='2xl:justify-center 2xl:items-center 2xl:flex'>
+                                                <div className='mt-5 pt-3 pb-3 pl-3 pr-1 ml-4  mr-4 shadow-lg border rounded-lg 2xl:w-2/6' key={course.id}>
+                                                    <p className='font-Mulish' onClick={toggleIframe}>{course.description}</p>
+                                                    <div className='Iframe'>
+                                                        <MediaQuery minWidth={300} maxWidth={767}>
+                                                            <iframe
+                                                                title={course.description}
+                                                                src={`${course.file}`}
+                                                                width={`100%`}
+                                                                height="650"
+                                                                allow="autoplay"
+                                                            ></iframe>
+                                                        </MediaQuery>
+                                                        <MediaQuery minWidth={768}>
+                                                            <iframe
+                                                                title={course.description}
+                                                                src={`${course.file}`}
+                                                                width={`100%`}
+                                                                height="700"
+                                                                allow="autoplay"
+                                                            ></iframe>
+                                                        </MediaQuery>
+                                                    </div>
+                                                    
+                                                
                                                 </div>
-                                                }
                                             </div>
                                         );
                                     })

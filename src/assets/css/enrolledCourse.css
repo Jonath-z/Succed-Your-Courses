@@ -1,9 +1,11 @@
-.enrolledCourse-container{
+@media screen and (max-width: 768px) {
+  .enrolledCourse-container {
     width: 100%;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-}
-.enrolled-course{
+  }
+  .enrolled-course {
     width: 100vw;
     scroll-snap-align: start;
+  }
 }

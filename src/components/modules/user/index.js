@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RiMenu2Line } from 'react-icons/ri';
 import SideBar from '../sidBar/SideBar';
 import { useUser } from '../../context';
+import MediaQuery from 'react-responsive';
 
 
 const User = ({ menu }) => {
@@ -14,11 +15,21 @@ const User = ({ menu }) => {
     };
 
     return (
-        <div className='flex flex-row justify-between items-center mt-3 mr-3 ml-3 pb-3'>
-            <RiMenu2Line className='text-3xl cursor-pointer' onClick={onClick} />
-            {showSidebar &&
-                <SideBar hideMenu={onClick} />
-            }
+        <div className='flex flex-row justify-between items-center mt-3 mr-3 ml-3 pb-3 2xl:justify-around 2xl:mr-0 2xl:ml-0'>
+            <MediaQuery minWidth={300} maxWidth={1023}>
+                <RiMenu2Line className='text-3xl cursor-pointer' onClick={onClick} />
+                {showSidebar &&
+                    <SideBar hideMenu={onClick} />
+                }
+            </MediaQuery>
+            <MediaQuery minWidth={1024}>
+                <div>
+                    <p className='font-Poppins text-xl'>
+                        Succed your 
+                        <span className='text-2778F0'> courses</span>
+                    </p>
+                </div>
+            </MediaQuery>
             <div>
                 <p className='font-Poppins'>{menu}</p>
             </div>

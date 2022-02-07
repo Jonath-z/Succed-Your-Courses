@@ -3,9 +3,9 @@ import { FaFilter } from 'react-icons/fa';
 
 const Search = ({onFocus,onChange}) => {
     return (
-        <div className='flex flex-row justify-center items-center mt-5'>
+        <div className='flex flex-row justify-center items-center mt-5 2xl:mt-7'>
             <input type='search' placeholder='Search your course'
-                className='border-2 border-gray-300 pt-1 pb-1 pl-3 pr-3 font-Mulish rounded-full w-72'
+                className='border-2 border-gray-300 pt-1 pb-1 pl-3 pr-3 font-Mulish rounded-full w-72 2xl:w-96 2xl:rounded-lg 2xl:pt-2 2xl:pb-2'
                 onFocus={onFocus}
                 onChange={onChange}
             />

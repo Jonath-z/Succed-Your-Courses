@@ -26,11 +26,11 @@ const EnrolledCourses = ({ flexDirection, marginTop }) => {
     
     return (
         <div>
-            <div>
-                <p className='font-Poppins ml-5 mt-0 mb-5'>Enrolled courses</p>
+            <div className='2xl:flex 2xl:justify-center xl:flex lg:flex xl:justify-center lg:justify-center'>
+                <p className='font-Poppins 2xl:w-2/6 xl:w-2/3 lg:w-2/3 ml-5 mt-0 mb-5'>Enrolled courses</p>
             </div>
-            <div className='ml-5 mr-5'>
-                <ul className={`enrolledCourse-container w-full flex ${flexDirection} rounded-lg`}>
+            <div className='ml-5 mr-5 2xl:text-center'>
+                <ul className={`enrolledCourse-container w-full flex ${flexDirection} rounded-lg 2xl:justify-center xl:justify-center lg:justify-center 2xl:items-center`}>
                     {
                         user !== undefined && user.courses !== undefined && user.courses !== 0 && user.courses.map(courseID => {
                             return (
@@ -45,19 +45,21 @@ const EnrolledCourses = ({ flexDirection, marginTop }) => {
                                                     backgroundPosition: 'center',
                                                     backgroundSize: 'auto',
                                                 }}
-                                                    className={`h-52 w-screen enrolled-course pl-5 pt-5 pr-5 ${marginTop}`}
+                                                    className={`
+                                                    h-52 w-screen 2xl:w-2/6 xl:w-2/3 lg:w-2/3 2xl:h-96 xl:h-96  lg:h-96 xl:rounded-xl lg:rounded-xl md:h-72 2xl:rounded-xl enrolled-course pl-5 pt-5 pr-5 ${marginTop} 2xl:flex 2xl:items-center
+                                                    `}
                                                     key={uuid()}
                                                 >
-                                                    <div className='w-screen'>
-                                                        <p className='text-white font-Poppins'>{course.module}</p>
+                                                    <div className='w-screen 2xl:w-0'>
+                                                        <p className='text-white font-Poppins 2xl:text-2xl'>{course.module}</p>
                                                         <p className='text-white font-Mulish'>{course.class}</p>
                                                         <Link to={`module-content/${courseID}`}>
                                                             <button
-                                                            className='mt-5 border-2 border-white rounded-full text-white font-Mulish pt-1 pl-2 pr-2 pb-1 text-sm'
+                                                                className='mt-5 border-2 border-white rounded-full text-white font-Mulish pt-1 pl-2 pr-2 pb-1 text-sm 2xl:bg-2778F0 2xl:w-52 2xl:border-none 2xl:pt-2 2xl:pb-2  2xl:rounded-md'
                                                             >
                                                                 Open now
                                                             </button>
-                                                            </Link>
+                                                        </Link>
                                                     </div>
                                                 </li>
                                             )
@@ -70,8 +72,7 @@ const EnrolledCourses = ({ flexDirection, marginTop }) => {
                     }
                 </ul>
             </div>
-        </div>
-    );
+        </div>    );
 }
 
 export default EnrolledCourses

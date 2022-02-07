@@ -34,14 +34,14 @@ const Payement = () => {
                         <input
                             type='number'
                             placeholder='Enter Amount'
-                            className='border outline-none pt-1 pb-1 pl-2 pr-2 font-Mulish mt-4 w-full'
+                            className='border outline-none pt-1 pb-1 pl-2 pr-2 font-Mulish mt-4 w-full 2xl:pt-2 2xl:pb-2 2xl:rounded-md'
                             onChange={handleAmount}
                         />
                         <p className='font-Poppins mt-4'>Payement Proof</p>
                         <input
                             type='file'
                             placeholder='Enter the payement proof'
-                            className='mt-2 font-Mulish w-full border rounded-l-md'
+                            className='mt-2 font-Mulish w-full border rounded-l-md 2xl:pt-2 2xl:pb-2 2xl:pl-2 2xl:rounded-md'
                             onChange={handlePayementProof}
                         />
                         <button className='font-Poppins bg-2778F0 text-white w-full mt-4 pt-2 pb-2 rounded-lg' onClick={submitPayement}>Submit</button>

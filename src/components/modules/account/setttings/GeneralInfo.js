@@ -68,7 +68,7 @@ function GeneralInfo() {
                         {!isUpdateName && <p className='font-Mulish text-xs'>{user.name}</p>}
                         {!isUpdateName && <p className='font-Poppins float-right text-xs text-2778F0 pt-2 cursor-pointer mr-3' onClick={updateName}>Update</p>}
                         {isUpdateName && <div>
-                            <input type='text' placeholder='Enter new name' className='mt-4 font-Mulish w-full border pl-2 outline-none'
+                            <input type='text' placeholder='Enter new name' className='mt-4 font-Mulish w-full border pl-2 outline-none 2xl:pt-2 2xl:pb-2 2xl:rounded-md'
                                 onChange={handleName}
                             />
                             <button className='font-Poppins bg-2778F0 text-white w-full mt-4 pt-2 pb-2 rounded-lg'
@@ -83,7 +83,7 @@ function GeneralInfo() {
                         {!isUpdateEmail && <p className='font-Mulish text-xs'>{user.email}</p>}
                         {!isUpdateEmail && <p className='font-Poppins float-right text-xs text-2778F0 pt-2 cursor-pointer mr-3' onClick={updateEmail}>Update</p>}
                         {isUpdateEmail && <div>
-                            <input type='email' placeholder='Enter new email' className='mt-4 font-Mulish w-full border pl-2 outline-none'
+                            <input type='email' placeholder='Enter new email' className='mt-4 font-Mulish w-full border pl-2 outline-none 2xl:pt-2 2xl:pb-2 2xl:rounded-md'
                                 onChange={handleEmail}
                             />
                             <button className='font-Poppins bg-2778F0 text-white w-full mt-4 pt-2 pb-2 rounded-lg'
@@ -106,7 +106,7 @@ function GeneralInfo() {
                             !isUpdatePhone && <p className='font-Poppins float-right text-xs text-2778F0 pt-2 cursor-pointer mr-3' onClick={updatePhone}>Update</p>
                         }
                         {isUpdatePhone && <div>
-                            <input type='tel' placeholder='Enter new phone number' className='mt-4 font-Mulish w-full border pl-2 outline-none'
+                            <input type='tel' placeholder='Enter new phone number' className='mt-4 font-Mulish w-full border pl-2 outline-none 2xl:pt-2 2xl:pb-2 2xl:rounded-md'
                                 onChange={handlePhone}
                             />
                             <button className='font-Poppins bg-2778F0 text-white w-full mt-4 pt-2 pb-2 rounded-lg'

@@ -28,7 +28,7 @@ const Security = () => {
                     <p className='font-Poppins flex flex-col'>
                         Update Password
                         <span className='font-Mulish text-xs'>
-                            <input type='password' placeholder='' className='bg-white mt-1 border outline-none w-full pt-1 pb-1 pl-2' onChange={handlePassword}></input>
+                            <input type='password' placeholder='' className='bg-white mt-1 border outline-none w-full pt-1 pb-1 pl-2 2xl:pt-2 2xl:pb-2 2xl:rounded-md' onChange={handlePassword}></input>
                         </span>
                     </p>
                     <p className='font-Poppins float-right text-xs text-2778F0 pt-2 cursor-pointer mr-3' onClick={updatePassword}>Update</p>

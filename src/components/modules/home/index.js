@@ -5,10 +5,11 @@ import Search from '../search';
 import EnrolledCourses from '../../modules/courses/EnrolledCourses';
 import { useSelector } from 'react-redux';
 import actionsType from '../../../state/actions/action_types/actionType';
-// import { DispatchAllcourses } from '../../../hooks';
 import Account from '../account';
 import { IoIosArrowDown } from 'react-icons/io';
 import SearchedCourses from '../search/SearchedCourses';
+import MediaQuery from 'react-responsive';
+import Menu from '../sidBar/menu';
 
 const Home = () => {
     const menuHandler = useSelector((state) => state.menuReducer);
@@ -42,65 +43,68 @@ const Home = () => {
                             flexDirection={'flex-col'}
                             marginTop={'mt-5'}
                         />
+                        <MediaQuery minWidth={1024}>
+                            <Menu />
+                        </MediaQuery>
                     </div>
                 </div>
-            )
+            );
         case actionsType.EXPLORE_COURSES:
             return (
+                <>
                 <div className='flex flex-col fixed h-screen w-screen'>
                     <div className='fixed top-0 w-screen bg-white'>
                         <User menu={'Explore Courses'} />
                     </div>
-                    <p className='font-Poppins ml-5 mt-20 pb-1'>All course</p>
-                    <div className='pb-20 overflow-y-scroll'>
+                    <MediaQuery minWidth={1024}>
+                        <Menu />
+                    </MediaQuery>
+                    <div className='pb-20 overflow-y-scroll 2xl:mt-32 md:mt-20'>
                         <AllCourses />
                     </div>
-                </div>
-            )
+                    </div>
+                    </>
+            );
         case actionsType.ACCOUNT:
             return (
                 <div className='flex flex-col fixed h-screen w-screen overflow-y-scroll'>
                     <div className='fixed top-0 w-screen bg-white'>
                         <User menu={'Account'} />
                     </div>
-                    <div className='mt-20'>
+                    <MediaQuery minWidth={1024}>
+                        <Menu />
+                    </MediaQuery>
+                    <div className='mt-20 2xl:flex 2xl:justify-center md:justify-center md:flex'>
                         <Account />
                     </div>
                 </div>
-            )
-        case actionsType.REPORT_PROBLEM:
-            return (
-                <div className='flex flex-col fixed h-screen w-screen'>
-                    <div className='fixed top-0 w-screen bg-white'>
-                        <User menu={'Report a Problem'} />
-                    </div>
-                </div>
-            )
+            );
         case actionsType.HOME:
             return (
                 <>
-                    <div className='flex flex-col fixed h-screen w-screen'>
-                        <div className='fixed top-0 w-screen bg-white'>
+                    <div className='flex flex-col fixed h-screen w-screen 2xl:relative'>
+                        <div className='fixed top-0 w-screen 2xl:w-full bg-white'>
                             <User menu={'Home'} />
                         </div>
                         <div className='mt-20'>
                             {!isSearch && <EnrolledCourses flexDirection={'flex-row'} />}
+                            <MediaQuery minWidth={1024}>
+                                <Menu />
+                            </MediaQuery>
                         </div>
-                        <div className='flex flex-row justify-center items-center'>
+                        <div className='flex flex-row justify-center items-start'>
                             {isSearch && <IoIosArrowDown className='text-3xl mt-7 mr-3' onClick={noFucus} />}
                             <Search
                                 onFocus={onFucus}
                                 onChange={onChange}
                             />
                         </div>
-                        <p className='font-Poppins ml-5 mt-5 pb-1'>All course</p>
-                        <div className='pb-20 overflow-y-scroll'>
+                        <div className='pb-20 sm:overflow-y-scroll xsm:overflow-y-scroll '>
                             {!isSearch ?
                                 <AllCourses /> :
                                 <SearchedCourses
                                     inputValue={inputValue}
                                 />
-                            
                             }
                         </div>
                     </div>
@@ -108,12 +112,15 @@ const Home = () => {
             );
         default:
             return (
-                <div className='flex flex-col fixed h-screen w-screen'>
-                    <div className='fixed top-0 w-screen bg-white'>
+                <div className='flex flex-col fixed h-screen w-screen 2xl:relative'>
+                    <div className='fixed top-0 w-screen 2xl:w-full bg-white'>
                         <User menu={'Home'} />
                     </div>
                     <div className='mt-20'>
                         {!isSearch && <EnrolledCourses flexDirection={'flex-row'} />}
+                        <MediaQuery minWidth={1024}>
+                            <Menu />
+                        </MediaQuery>
                     </div>
                     <div className='flex flex-row justify-center items-start'>
                         {isSearch && <IoIosArrowDown className='text-3xl mt-7 mr-3' onClick={noFucus} />}
@@ -122,18 +129,16 @@ const Home = () => {
                             onChange={onChange}
                         />
                     </div>
-                    <p className='font-Poppins ml-5 mt-5 pb-1'>All course</p>
-                    <div className='pb-20 overflow-y-scroll'>
+                    <div className='pb-20 sm:overflow-y-scroll xsm:overflow-y-scroll '>
                         {!isSearch ?
                             <AllCourses /> :
                             <SearchedCourses
                                 inputValue={inputValue}
                             />
-                            
                         }
                     </div>
                 </div>
-            )
+            );
     }
 }
 
