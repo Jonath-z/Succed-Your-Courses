@@ -16,7 +16,7 @@ const Account = () => {
     }
 
     return (
-        <div className=' flex flex-col sm:overflow-y-scroll xsm:overflow-y-scroll 2xl:w-2/6 md:w-2/3'>
+        <div className=' flex flex-col sm:overflow-y-scroll xsm:overflow-y-scroll 2xl:w-2/6 md:w-2/3 lg:w-2/4 xl:w-2/4'>
             <p className='font-Poppins text-xl mt-1 ml-2 mb-2'>Profile</p>
             <Profile />
             <div className='mt-10'>
