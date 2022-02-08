@@ -1,4 +1,3 @@
-// import { BrowserRouter as Router, Route} from "react-router-dom";
 import Home from "./components/modules/home";
 import Dashbord from "./components/modules/dashbord/index";
 import CourseContent from './components/modules/courseContent'
@@ -10,9 +9,22 @@ import store from "./state/store/store";
 import { DispatchAllcourses } from "./hooks";
 import UserProvider from "./components/context";
 import MediaQuery from "react-responsive";
+import { useEffect } from "react";
+import { realTimeDB } from "./components/services/firebase";
+import { LocalStorage } from "./components/helper/localStorage";
 
 const App = () => {
-    DispatchAllcourses();
+  DispatchAllcourses();
+
+  useEffect(() => {
+    realTimeDB.ref('/modules').on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        const courses = Object.values(snapshot.val());
+        console.log(courses);
+        LocalStorage.set('courses', JSON.stringify(courses));
+      }
+    });
+  }, []);
 
   const history = createBrowserHistory(store);
 
