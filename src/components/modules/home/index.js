@@ -10,6 +10,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import SearchedCourses from '../search/SearchedCourses';
 import MediaQuery from 'react-responsive';
 import Menu from '../sidBar/menu';
+import EnrolledCoursesMedia from '../courses/mediaQuery';
 
 const Home = () => {
     const menuHandler = useSelector((state) => state.menuReducer);
@@ -59,7 +60,7 @@ const Home = () => {
                     <MediaQuery minWidth={1024}>
                         <Menu />
                     </MediaQuery>
-                    <div className='pb-20 overflow-y-scroll 2xl:mt-32 md:mt-20'>
+                    <div className='pb-20 overflow-y-scroll 2xl:mt-32 md:mt-20 mt-20'>
                         <AllCourses />
                     </div>
                     </div>
@@ -74,7 +75,7 @@ const Home = () => {
                     <MediaQuery minWidth={1024}>
                         <Menu />
                     </MediaQuery>
-                    <div className='mt-20 2xl:flex 2xl:justify-center md:justify-center md:flex'>
+                    <div className='mt-20 2xl:flex 2xl:justify-center xl:flex xl:justify-center lg:flex lg:justify-center md:justify-center md:flex'>
                         <Account />
                     </div>
                 </div>
@@ -87,7 +88,16 @@ const Home = () => {
                             <User menu={'Home'} />
                         </div>
                         <div className='mt-20'>
-                            {!isSearch && <EnrolledCourses flexDirection={'flex-row'} />}
+                            {!isSearch &&
+                                <>
+                                    <MediaQuery maxWidth={1023}>
+                                        <EnrolledCourses flexDirection={'flex-row'} />
+                                    </MediaQuery>
+                                    <MediaQuery minWidth={1024}>
+                                        <EnrolledCoursesMedia />
+                                    </MediaQuery>
+                                </>
+                            }
                             <MediaQuery minWidth={1024}>
                                 <Menu />
                             </MediaQuery>
@@ -117,7 +127,16 @@ const Home = () => {
                         <User menu={'Home'} />
                     </div>
                     <div className='mt-20'>
-                        {!isSearch && <EnrolledCourses flexDirection={'flex-row'} />}
+                        {!isSearch &&
+                            <>
+                                <MediaQuery maxWidth={1023}>
+                                    <EnrolledCourses flexDirection={'flex-row'} />
+                                </MediaQuery>
+                                <MediaQuery minWidth={1024}>
+                                    <EnrolledCoursesMedia />
+                                </MediaQuery>
+                            </>
+                        }
                         <MediaQuery minWidth={1024}>
                             <Menu />
                         </MediaQuery>
