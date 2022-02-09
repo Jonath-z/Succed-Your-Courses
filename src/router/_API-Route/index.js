@@ -1,2 +1,5 @@
-export const getToken = 'http://localhost:3000/api/v1/getToken';
-export const verifyToken = 'http://localhost:3000/api/v1/verifyToken';
+export const getToken = `${process.env.REACT_APP_API_URL}/api/v1/getToken`;
+export const verifyToken = `${process.env.REACT_APP_API_URL}/api/v1/verifyToken`;
+
+
+console.log(process.env);
