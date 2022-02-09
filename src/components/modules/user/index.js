@@ -38,7 +38,7 @@ const User = ({ menu }) => {
                 <p className='font-Poppins'>{menu}</p>
             </div>
             <div className='h-10 w-10 rounded-full text-white bg-2778F0 text-center flex justify-center items-center'>
-                {user !== undefined && <p className='font-Poppins cursor-pointer'>{user.name.charAt(0).toUpperCase()}</p>}
+                {user !== null && <p className='font-Poppins cursor-pointer'>{user.name.charAt(0).toUpperCase()}</p>}
             </div>
         </div>
     );

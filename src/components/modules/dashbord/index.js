@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import { acceptRequest } from './services/AcceptRequest';
 import Courses from './Courses';
+import { rejectRequest } from './services/RejectRequst';
 
 const Dashbord = () => {
     const [addModuleName, setAddModuleName] = useState('');
@@ -85,10 +86,14 @@ const Dashbord = () => {
                                 <p>User: {request.user.name}</p>
                                 <p>Email: {request.user.email}</p>
                                 <div className='flex felx-col mt-4'>
-                                    <button type='button' className='text-white bg-green-600 hover:bg-green-700 pt-2 pb-2 pl-2 pr-2 w-24' onClick={() => {
+                                        <button type='button' className='text-white bg-green-600 hover:bg-green-700 pt-2 pb-2 pl-2 pr-2 w-24' onClick={() => {
                                         acceptRequest(request.id, request);
-                                    }}>Accept</button>
-                                    <button type='button' className='text-white bg-red-600 hover:bg-red-700 pt-2 pb-2 pl-2 pr-2 ml-5 w-24'>Reject</button>
+                                    }}>{request.rejected && request.rejected === false ? 'Accepted':'Accept' }</button>
+                                    <button
+                                        type='button'
+                                        className='text-white bg-red-600 hover:bg-red-700 pt-2 pb-2 pl-2 pr-2 ml-5 w-24'
+                                        onClick={() => { rejectRequest(request.id, request) }}
+                                    >{request.rejected && request.rejected === true ? 'Rejected':'Reject' }</button>
                                 </div>
                             </div>    
                         )

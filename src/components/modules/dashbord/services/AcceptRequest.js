@@ -1,6 +1,6 @@
 import { getToken } from "../../../../router/_API-Route";
-import { fireStoreDB,realTimeDB } from "../../../services/firebase";
-// import uuid from "react-uuid";
+import { fireStoreDB, realTimeDB } from "../../../services/firebase";
+import { requestAcceptedNotification} from "./email";
 
 export const acceptRequest = async (requestID, user) => {
     
@@ -34,5 +34,8 @@ export const acceptRequest = async (requestID, user) => {
                 });
             };
         });
-    realTimeDB.ref('/request').child(requestID).remove();
+    realTimeDB.ref('/request').child(requestID).update({
+        rejected: false
+    });
+    requestAcceptedNotification(user.user);
 }

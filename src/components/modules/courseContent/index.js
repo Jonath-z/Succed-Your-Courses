@@ -38,9 +38,13 @@ const CourseContent = () => {
 
     useEffect(() => {
         (async () => {
-            const tokenStatus = await verifyToken(user);
-            console.log('token status', tokenStatus);
-            setExpiredToken(tokenStatus);
+            try {
+                const tokenStatus = await verifyToken(user);
+                console.log('token status', tokenStatus);
+                setExpiredToken(tokenStatus);
+            } catch {
+                setExpiredToken(true);
+            }
         })();
     }, [user]);
 
