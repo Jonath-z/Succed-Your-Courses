@@ -55,7 +55,7 @@ export const getAllCourse = (database) => {
         database.ref('/modules').on('value', (snapshot) => {
             if (snapshot.exists()) {
                 const courses = Object.values(snapshot.val());
-                console.log(courses);
+                // console.log(courses);
                 dispatch({
                     type: actionsType.ALL_COURSE,
                     payload: courses
@@ -67,7 +67,7 @@ export const getAllCourse = (database) => {
 
 ///////////////////////////// ENROLL TO THE COURSE //////////////////////////////
 export const enroll = (enrolledCourses) => {
-    console.log(enrolledCourses);
+    // console.log(enrolledCourses);
     return (dispatch) => {
         dispatch({
             type: actionsType.ENROLL,

@@ -18,10 +18,10 @@ const SearchedCourses = ({inputValue}) => {
             let adress = courseName.textContent || courseName.innerText;
             if (adress.toUpperCase().indexOf(inputValue) > -1) {
                 adressList[i].style.display = 'block';
-                console.log(adressList[i].style.display);
+                // console.log(adressList[i].style.display);
             } else {
                 adressList[i].style.display = 'none';
-                console.log(adressList[i].style.display);
+                // console.log(adressList[i].style.display);
             }
         }
     }

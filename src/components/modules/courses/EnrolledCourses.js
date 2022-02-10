@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { realTimeDB } from '../../services/firebase';
 import '../../../assets/css/enrolledCourse.css';
 import { Link} from 'react-router-dom';
@@ -10,8 +10,8 @@ const EnrolledCourses = ({ flexDirection, marginTop }) => {
     const user = useUser();
     
     /////////////// GET THE DISPATCHED ENROLLED COURSES TO ADD ID IN "EnrollCourses" COMPONENT//////
-    const newEnrolledCourse = useSelector((state) => state.enroll);
-    console.log(newEnrolledCourse);
+    // const newEnrolledCourse = useSelector((state) => state.enroll);
+    // console.log(newEnrolledCourse);
 
     //////////////// ALL COURSES STORED IN THIS USESTATE///////
     const [allcourse, setAllcourse] = useState();

@@ -40,7 +40,7 @@ function GeneralInfo() {
     }
 
     const submitName = () => {
-        console.log(user);
+        // console.log(user);
         updateNewName(name, user.id);
         setTimeout(setUpdatecomplete(true), 2000);
         setName('');

@@ -18,7 +18,7 @@ export const acceptRequest = async (requestID, user) => {
     })
     const token = await requestToken.json();
 
-    console.log(token);
+    // console.log(token);
     
     fireStoreDB.collection('users').where("email", "==", `${user.user.email}`)
         .get()

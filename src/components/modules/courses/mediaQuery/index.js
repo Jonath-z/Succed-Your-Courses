@@ -40,7 +40,7 @@ const EnrolledCoursesMedia = ({ flexDirection, marginTop }) => {
         }
         if (indexRef.current === 0) {
             setIsMinLength(true);
-            console.log(user.courses.length, 'current index: ', indexRef.current);
+            // console.log(user.courses.length, 'current index: ', indexRef.current);
         }
         if (user.courses.length === 1) {
             setIsMinLength(false);

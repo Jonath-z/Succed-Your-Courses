@@ -27,7 +27,7 @@ const CourseContent = () => {
                     snapshot.forEach(doc => {
                         setModules(doc.data());
                         setIsModuleExist(true);
-                        console.log(doc.data());
+                        // console.log(doc.data());
                     });
                 }
                 else {
@@ -40,7 +40,7 @@ const CourseContent = () => {
         (async () => {
             try {
                 const tokenStatus = await verifyToken(user);
-                console.log('token status', tokenStatus);
+                // console.log('token status', tokenStatus);
                 setExpiredToken(tokenStatus);
             } catch {
                 setExpiredToken(true);

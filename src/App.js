@@ -20,7 +20,7 @@ const App = () => {
     realTimeDB.ref('/modules').on('value', (snapshot) => {
       if (snapshot.exists()) {
         const courses = Object.values(snapshot.val());
-        console.log(courses);
+        // console.log(courses);
         LocalStorage.set('courses', JSON.stringify(courses));
       }
     });

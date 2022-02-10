@@ -19,7 +19,7 @@ const update = (snapshot,courseID) => {
 export const updateLocalStorage = (courseID) => {
     const user = JSON.parse(LocalStorage.get('userData'));
     user.courses.push(courseID);
-    console.log('courses updated', user);
+    // console.log('courses updated', user);
     LocalStorage.set('userData', JSON.stringify(user));
     return JSON.parse(LocalStorage.get('userData'));
 }

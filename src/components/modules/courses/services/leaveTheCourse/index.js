@@ -18,12 +18,12 @@ const update = (snapshot,courseID) => {
 //////////////////// UPDATE LOCALSTORAGE /////////////////////
 export const deleteInLocalStorage = (courseID) => {
     const user = JSON.parse(LocalStorage.get('userData'));
-    console.log('courseData', user);
+    // console.log('courseData', user);
     for (let i = 0; i < user.courses.length; i++){
-        console.log(user.courses[i],'courseID')
+        // console.log(user.courses[i],'courseID')
         if (courseID === user.courses[i]) {
             user.courses.splice(i, 1);
-            console.log('updated after deletion', user);
+            // console.log('updated after deletion', user);
             LocalStorage.set('userData', JSON.stringify(user));
             return JSON.parse(LocalStorage.get('userData'));
         }

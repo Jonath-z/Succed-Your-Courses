@@ -1,7 +1,7 @@
 import { verifyToken as verifyTokenRoute } from "../../../../../router/_API-Route";
 
 const verifyToken = async (user) => {
-    console.log(user);
+    // console.log(user);
     const verifyToken = await fetch(verifyTokenRoute, {
         method: 'POST',
         headers: {
@@ -14,7 +14,7 @@ const verifyToken = async (user) => {
     });
     
     const response = await verifyToken.json();
-    console.log(response);
+    // console.log(response);
 
     if (response.experied) {
         // alert(`You don't have access to the module, update your payement plan`);
